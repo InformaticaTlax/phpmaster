@@ -4,8 +4,12 @@
     $automovil2 = (object)["marca"=> "hyundaai", "modelo"=>"Accent"];
 
     function mostrar($automovil){
-        echo "";
+
+        echo "<p>Hola soy un $automovil->marca, modelo $automovil->modelo<p>";
 
     }
+
+    mostrar($automovil1);
+    mostrar($automovil2);
 
 ?>
