@@ -8,6 +8,7 @@
 #Si requerimos el mismo código más de una vez corremos el riesgo de redeclaraciones de variables, funciones o clases. 
 
 require_once "controladores/plantilla.controlador.php";
+require_once "controladores/formularios.controlador.php";
 
 
 $plantilla = new ControladorPlantilla();
