@@ -56,8 +56,28 @@
 
             <?php
 
-            $registro = new ControladorFormularios();
-            $registro->ctrRegistro();
+            //instanciar la clase de un metodo no estatico
+
+           // $registro = new ControladorFormularios();
+            //$registro->ctrRegistro();
+
+            //forma en la que se instancia la clase de un metodo estatico
+
+            $registro = ControladorFormularios::ctrRegistro();
+
+            if($registro == "ok"){
+
+                echo '<script> 
+                    if(windows.history.replaceState){
+                    
+                        windows.history.replaceState(null,null,windows.location.href);
+                    
+                    }    
+                </script>';
+
+                echo '<div class= "alert-success">El usuario a sido registrado</div>';
+            }
+            
 
             ?>
 
