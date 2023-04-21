@@ -3,10 +3,10 @@ class ControladorFormularios{
 
     //Resgistro
 
-    public function ctrRegistro(){
+    static public function ctrRegistro(){
         if(isset($_POST["registroNombre"])){
             
-            echo $_POST["registroNombre"];
+            return "ok";
 
         }
     }
