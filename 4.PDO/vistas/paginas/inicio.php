@@ -1,26 +1,38 @@
+<?php
+$usuarios = ControladorFormularios::ctrSeleccionarRegistros();
+
+
+
+?>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Firstname</th>
-			<th>Lastname</th>
-			<th>Email</th>
+			<th>Nombre</th>
+			<th>Email </th>
+			<th>Fecha</th>
+			<th>Acciones</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>John</td>
-			<td>Doe</td>
-			<td>john@example.com</td>
-		</tr>
-		<tr>
-			<td>Mary</td>
-			<td>Moe</td>
-			<td>mary@example.com</td>
-		</tr>
-		<tr>
-			<td>July</td>
-			<td>Dooley</td>
-			<td>july@example.com</td>
-		</tr>
+		<?php foreach ($usuarios as $key => $value) : ?>
+			<tr>
+				<td><?php echo $value["nombre"]; ?></td>
+				<td><?php echo $value["email"]; ?></td>
+				<td><?php echo $value["fecha"]; ?></td>
+				<td>
+					<div>
+						<button class="btn btn-warning"><i class="fas fa-pencil-alt"></i></button>
+						<button class="btn btn-danger"> <i class="fas fa-trash-alt"></i></button>
+					</div>
+
+
+				</td>
+			</tr>
+
+
+
+		<?php endforeach ?>
+
+
 	</tbody>
 </table>
