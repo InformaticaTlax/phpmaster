@@ -32,13 +32,25 @@ class ModeloFormularios{
     }
     //Seleccionar Registros
 
-    static public function mdlSeleccionarRegistros($tabla){
+    static public function mdlSeleccionarRegistros($tabla, $item, $valor){
 
-        $stmt = Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla");
+        if($item == null && $valor == null){
 
-        $stmt->execute();
+            $stmt = Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla ORDER BY id  DESC");
 
-        return $stmt ->fetchAll();
+            $stmt->execute();
+
+            return $stmt ->fetchAll();
+        }else{
+
+            $stmt = Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla WHERE $item = :$item ORDER BY id DESC");
+
+            $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        }
 
         $stmt->close();
 
