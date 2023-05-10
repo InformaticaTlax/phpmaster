@@ -82,7 +82,7 @@ class ControladorFormularios{
 
     //actualizar Registro
 
-    public function ctrActualizarRegistro(){
+    static public function ctrActualizarRegistro(){
 
         if (isset($_POST["actualizarNombre"])) {
 
@@ -100,26 +100,44 @@ class ControladorFormularios{
 
             $datos = array(
                 "id" => $_POST["idUsuario"],
-                "nombre" => $_POST["registroNombre"],
+                "nombre" => $_POST["actualizarNombre"],
                 "email" => $_POST["actualizarEmail"],
                 "password" => $password
             );
 
             $respuesta = ModeloFormularios::mdlActualizarRegistro($tabla, $datos);
-            
-            if($respuesta == "ok"){
-                echo '<script> 
-                    if(windows.history.replaceState){
-                    
-                        windows.history.replaceState(null,null,windows.location.href);
-                    
-                    }    
-                </script>';
 
-                echo '<div class= "alert-success">El usuario a sido Actualizado</div>';
+            return $respuesta;
+        
+        }
+    }
+    //eliminar registro
+    public function ctrEliminarRegistro(){
+        if (isset($_POST["eliminarRegistro"])) {
+
+            $tabla = "registros";
+
+            $valor = $_POST["eliminarRegistro"];
+
+            $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+
+            if($respuesta == "ok") {
+
+                echo '<script>
+
+					if ( window.history.replaceState ) {
+
+						window.history.replaceState( null, null, window.location.href );
+
+					}
+
+					window.location = "index.php?pagina=inicio";
+                    </script>' ;               
+
             }
-            
+
+        }
 
     }
-}
+
 }

@@ -69,8 +69,30 @@ if (isset($_GET["id"])) {
                 </div>
                 <?php
 
-                $actualizar = new ControladorFormularios();
-                $actualizar->ctrActualizarRegistro();
+                $actualizar = ControladorFormularios::ctrActualizarRegistro();
+                
+                if ($actualizar == "ok") {
+                    echo '<script> 
+                    if(windows.history.replaceState){
+                    
+                        windows.history.replaceState(null,null,windows.location.href);
+                    
+                    }    
+                    </script>';
+
+                    echo '<div class= "alert-success">El usuario a sido Actualizado</div>
+                    <script>
+                    
+                        setTimeout(function(){
+                            
+                            window.location = "index.php?pagina=inicio";
+                        },1500);
+
+                    </script>
+                
+                ';
+                
+                }
                 
                 ?>
 

@@ -81,5 +81,27 @@ class ModeloFormularios{
 
         $stmt = null;
     }
+    //eliminar registro
+
+    static public function mdlEliminarRegistro($tabla, $valor)
+    {
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+        $stmt->bindParam(":id",$valor,PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+
+            print_r(Conexion::conectar()->errorInfo());
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+
 
 }
