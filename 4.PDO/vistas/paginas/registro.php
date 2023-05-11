@@ -77,6 +77,18 @@
 
                 echo '<div class= "alert-success">El usuario a sido registrado</div>';
             }
+            if($registro == "error"){
+                echo '<script> 
+                    if(windows.history.replaceState){
+                    
+                        windows.history.replaceState(null,null,windows.location.href);
+                    
+                    }    
+                </script>';
+
+                echo '<div class= "alert-danger">no es permitido caracteres especiales</div>';
+
+            }
             
 
             ?>
