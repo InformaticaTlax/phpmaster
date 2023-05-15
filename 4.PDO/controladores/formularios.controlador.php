@@ -11,7 +11,10 @@ class ControladorFormularios{
 
                 $tabla = "registros";
 
+                $token = md5($_POST["registroNombre"]."+". $_POST["registroEmail"]);
+
                 $datos = array(
+                        "token" => $token,
                         "nombre" => $_POST["registroNombre"],
                         "email" => $_POST["registroEmail"],
                         "password" => $_POST["registroPassword"]
@@ -98,28 +101,56 @@ class ControladorFormularios{
 
         if (isset($_POST["actualizarNombre"])) {
 
-            if($_POST["actualizarPassword"] != ""){
+            if (preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["actualizarNombre"]) &&
+                preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["actualizarEmail"])) {
 
-                $password = $_POST["actualizarPassword"];
 
-            }else{
+                $usuario = ModeloFormularios::mdlSeleccionarRegistros("registros", "token", $_POST["tokenUsuario"]);
 
-                $password = $_POST["passwordActual"];
+                $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
 
+                if($compararToken == $_POST["tokenUsuario"]){
+
+            
+                    if($_POST["actualizarPassword"] != ""){
+
+                        if(preg_match('/^[0-9a-zA-Z]+$/', $_POST["actualizarPassword"])){
+
+                            $password = $_POST["actualizarPassword"];
+
+                        }
+
+                    }else{
+
+                        $password = $_POST["passwordActual"];
+
+                    }
+
+                    $tabla = "registros";
+
+                    $datos = array(
+                        "token" => $_POST["tokenUsuario"],
+                        "nombre" => $_POST["actualizarNombre"],
+                        "email" => $_POST["actualizarEmail"],
+                        "password" => $password
+                    );
+
+                    $respuesta = ModeloFormularios::mdlActualizarRegistro($tabla, $datos);
+
+                    return $respuesta;
+                }else{
+
+                    $respuesta = "error ";
+
+                    return $respuesta;
+
+                }
+            } else {
+
+                $respuesta = "error ";
+
+                return $respuesta;
             }
-
-            $tabla = "registros";
-
-            $datos = array(
-                "id" => $_POST["idUsuario"],
-                "nombre" => $_POST["actualizarNombre"],
-                "email" => $_POST["actualizarEmail"],
-                "password" => $password
-            );
-
-            $respuesta = ModeloFormularios::mdlActualizarRegistro($tabla, $datos);
-
-            return $respuesta;
         
         }
     }
@@ -127,25 +158,33 @@ class ControladorFormularios{
     public function ctrEliminarRegistro(){
         if (isset($_POST["eliminarRegistro"])) {
 
-            $tabla = "registros";
+            $usuario = ModeloFormularios::mdlSeleccionarRegistros("registros", "token", $_POST["eliminarRegistro"]);
 
-            $valor = $_POST["eliminarRegistro"];
+            $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
 
-            $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+            if ($compararToken == $_POST["eliminarRegistro"]) {
 
-            if($respuesta == "ok") {
 
-                echo '<script>
+                $tabla = "registros";
 
-					if ( window.history.replaceState ) {
+                $valor = $_POST["eliminarRegistro"];
 
-						window.history.replaceState( null, null, window.location.href );
+                $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
 
-					}
+                if($respuesta == "ok") {
 
-					window.location = "index.php?pagina=inicio";
-                    </script>' ;               
+                    echo '<script>
 
+                        if ( window.history.replaceState ) {
+
+                            window.history.replaceState( null, null, window.location.href );
+
+                        }
+
+                        window.location = "index.php?pagina=inicio";
+                        </script>' ;               
+
+                }
             }
 
         }
