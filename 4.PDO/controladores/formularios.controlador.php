@@ -60,6 +60,8 @@ class ControladorFormularios{
 
             if($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $_POST["ingresoPassword"]) {
 
+                ModeloFormularios::mdlIntentosFallidos($tabla, 0, $respuesta["token"]);
+
                 $_SESSION["validarIngreso"] = "ok";
                 
                 echo '<script>
@@ -78,6 +80,22 @@ class ControladorFormularios{
 
             }else{
 
+                if($respuesta["intentos_fallidos"] < 3){
+
+
+                    $tabla = "registros";
+
+                    $intentos_fallidos =$respuesta["intentos_fallidos"]+1;
+
+                    $actualizarIntentosFallidos = ModeloFormularios::mdlIntentosFallidos($tabla, $intentos_fallidos, $respuesta["token"]);
+
+                    echo '<pre>'; print_r($intentos_fallidos);echo '</pre>';
+                
+                }else{
+
+                    echo '<div class= "alert-warning">RECAPCHAT valida que no eres un robot</div>';
+
+                }
                 echo '<script> 
                     if(window.history.replaceState){
                     
