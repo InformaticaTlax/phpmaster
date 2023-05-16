@@ -13,11 +13,13 @@ class ControladorFormularios{
 
                 $token = md5($_POST["registroNombre"]."+". $_POST["registroEmail"]);
 
+                $encriptarPassword = crypt($_POST["registroPassword"], '$2a$07$aduvalinolocambiopornadad$');
+
                 $datos = array(
                         "token" => $token,
                         "nombre" => $_POST["registroNombre"],
                         "email" => $_POST["registroEmail"],
-                        "password" => $_POST["registroPassword"]
+                        "password" => $encriptarPassword
                     );
 
                 $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
@@ -58,7 +60,9 @@ class ControladorFormularios{
 
             $respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
 
-            if($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $_POST["ingresoPassword"]) {
+            $encriptarPassword = crypt($_POST["ingresoPassword"], '$2a$07$aduvalinolocambiopornadad$');
+
+            if($respuesta["email"] == $_POST["ingresoEmail"] && $respuesta["password"] == $encriptarPassword) {
 
                 ModeloFormularios::mdlIntentosFallidos($tabla, 0, $respuesta["token"]);
 
@@ -134,7 +138,7 @@ class ControladorFormularios{
 
                         if(preg_match('/^[0-9a-zA-Z]+$/', $_POST["actualizarPassword"])){
 
-                            $password = $_POST["actualizarPassword"];
+                            $password =crypt($_POST["actualizarPassword"], '$2a$07$aduvalinolocambiopornadad$');
 
                         }
 
