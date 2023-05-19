@@ -76,7 +76,7 @@ class ControladorFormularios{
 
 					}
 
-					window.location = "index.php?pagina=inicio";
+					window.location = "inicio";
 
 				</script>';
 
@@ -203,7 +203,7 @@ class ControladorFormularios{
 
                         }
 
-                        window.location = "index.php?pagina=inicio";
+                        window.location = "inicio";
                         </script>' ;               
 
                 }
