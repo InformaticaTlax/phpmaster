@@ -131,7 +131,7 @@ class ControladorFormularios{
 
                 $compararToken = md5($usuario["nombre"] . "+" . $usuario["email"]);
 
-                if($compararToken == $_POST["tokenUsuario"] && $_POST["idUsuario"] == $usuario["id"] ){
+                if($compararToken == $_POST["tokenUsuario"] && $_POST["idUsuario"] == $usuario["id"]){
 
             
                     if($_POST["actualizarPassword"] != ""){
@@ -150,7 +150,7 @@ class ControladorFormularios{
 
                     $tabla = "registros";
 
-                    $actualizarToken = md5($_POST["actualizarNombre"] . "+" . $_POST["actualizarEmail"]);
+                    $actualizarToken=md5($_POST["actualizarNombre"] . "+" . $_POST["actualizarEmail"]);
 
                     $datos = array(
                         "id" => $_POST["idUsuario"],

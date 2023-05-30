@@ -63,9 +63,7 @@ class ModeloFormularios{
     static public function mdlActualizarRegistro($tabla, $datos)
     {
         
-        $stmt = Conexion::conectar()->prepare("UPDATE  $tabla SET  token =:token, nombre=:nombre, email=:email, password=:password WHERE id = :id ");
-
-        
+        $stmt = Conexion::conectar()->prepare("UPDATE  $tabla SET token=:token nombre=:nombre, email=:email, password=:password WHERE id = :id ");
 
         
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
