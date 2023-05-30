@@ -66,11 +66,13 @@ if (isset($_GET["token"])) {
 
                     <input type="hidden" name="tokenUsuario" value="<?php echo $usuario["token"]; ?>">
 
+                    <input type="hidden" name="idUsuario" value="<?php echo $usuario["id"]; ?>">
+
                 </div>
                 <?php
 
                 $actualizar = ControladorFormularios::ctrActualizarRegistro();
-                
+
                 if ($actualizar == "ok") {
                     echo '<script> 
                     if(windows.history.replaceState){
@@ -91,7 +93,6 @@ if (isset($_GET["token"])) {
                     </script>
                 
                 ';
-                
                 }
 
                 if ($actualizar == "error") {
@@ -108,7 +109,7 @@ if (isset($_GET["token"])) {
                 
                 ';
                 }
-                
+
                 ?>
 
 
