@@ -174,16 +174,13 @@ session_start();
                 include "paginas/registro.php";
             }
 
-
-
-
             ?>
-
 
         </div>
 
     </div>
 
+    <script src="vistas/js/script.js"></script>
 
 </body>
 
