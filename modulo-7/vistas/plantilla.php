@@ -58,7 +58,23 @@
 </head>
 
 <body>
-    hola soy una platilla muy bien
+    <?php
+    //modulos fijos superiores
+    
+    include "paginas/modulos/cabecera.php";
+    include "paginas/modulos/redes-sociales-movil.php";
+    include "paginas/modulos/buscador-movil.php";
+    include "paginas/modulos/menu.php";
+
+    //navegar entre paginas
+
+    include "paginas/inicio.php";
+    
+    //modulos fijos inferiores
+    include "paginas/modulos/footer.php";
+    
+    
+    ?>
 
     <script src="vistas/js/script.js"></script>
 
