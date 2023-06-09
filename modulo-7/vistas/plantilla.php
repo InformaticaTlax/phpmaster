@@ -68,7 +68,7 @@
 
     //navegar entre paginas
 
-    include "paginas/inicio.php";
+    include "paginas/categorias.php";
     
     //modulos fijos inferiores
     include "paginas/modulos/footer.php";
