@@ -9,7 +9,10 @@
 
     <title>Juanito Travel</title>
 
-    <link rel="icon" href="vistas/img/icono.jpg">
+    <meta name="title" content="Juanito Travel">
+    <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae mollitia et animi beatae voluptates, sint exercitationem magni consequuntur ipsa, recusandae. Cumque, maxime, sequi. Id at ">
+
+    <link rel=" icon" href="vistas/img/icono.jpg">
 
     <!--=====================================
 	PLUGINS DE CSS
@@ -60,7 +63,7 @@
 <body>
     <?php
     //modulos fijos superiores
-    
+
     include "paginas/modulos/cabecera.php";
     include "paginas/modulos/redes-sociales-movil.php";
     include "paginas/modulos/buscador-movil.php";
@@ -69,11 +72,11 @@
     //navegar entre paginas
 
     include "paginas/categorias.php";
-    
+
     //modulos fijos inferiores
     include "paginas/modulos/footer.php";
-    
-    
+
+
     ?>
 
     <script src="vistas/js/script.js"></script>
