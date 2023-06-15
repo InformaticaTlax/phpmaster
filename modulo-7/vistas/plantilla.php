@@ -1,3 +1,8 @@
+<?php
+$blog = ControladorBlog::ctrMostrarBlog();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
