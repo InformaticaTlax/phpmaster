@@ -1,6 +1,6 @@
 <?php
 $blog = ControladorBlog::ctrMostrarBlog();
-echo'<pre class= "bg-white">'; print_r($blog); echo '</pre>';
+//echo'<pre class= "bg-white">'; print_r($blog); echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +12,11 @@ echo'<pre class= "bg-white">'; print_r($blog); echo '</pre>';
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Juanito Travel</title>
+    <title><?php echo $blog["titulo"]; ?></title>
 
-    <meta name="title" content="Juanito Travel">
-    <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae mollitia et animi beatae voluptates, sint exercitationem magni consequuntur ipsa, recusandae. Cumque, maxime, sequi. Id at ">
+    <meta name="title" content="<?php echo $blog["titulo"]; ?>">
+    <meta name="description" content=<?php echo $blog["descripcion"]; ?>>
+    <meta name="keywords" content=<?php echo $blog["palabras_claves"]; ?>>
 
     <link rel=" icon" href="vistas/img/icono.jpg">
 
