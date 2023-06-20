@@ -227,15 +227,12 @@ CONTENIDO INICIO
 
                 <!-- SOBRE MI -->
 
-                <div class="sobreMi">
+                <?php 
 
-                    <h4>Sobre Mi</h4>
-
-                    <img src="vistas/img/sobreMi.jpg" alt="Lorem ipsum dolor sit amet" class="img-fluid my-1">
-
-                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum odio, eos architecto atque numquam alias laboriosam minima beatae consectetur.</p>
-
-                </div>
+					echo $blog["sobre_mi"];
+				 
+				 ?>
+                
 
                 <!-- Artículos destacados -->
 

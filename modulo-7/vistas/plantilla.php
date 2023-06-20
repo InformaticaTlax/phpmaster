@@ -16,7 +16,29 @@ $blog = ControladorBlog::ctrMostrarBlog();
 
     <meta name="title" content="<?php echo $blog["titulo"]; ?>">
     <meta name="description" content=<?php echo $blog["descripcion"]; ?>>
-    <meta name="keywords" content=<?php echo $blog["palabras_claves"]; ?>>
+
+    <?php
+
+    $palabras_claves = json_decode($blog["palabras_claves"],true);
+    //echo '<pre>'; print_r($palabras_claves); echo'</pre>';
+
+    $palabras_claves = json_decode($blog["palabras_claves"], true);
+
+    $p_claves= "";
+
+    foreach($palabras_claves as $key => $value){
+        $p_claves.= $value.", ";
+    }
+
+    $p_claves = substr($p_claves, 0,-2);
+/*
+    echo '<pre>';
+    print_r($p_claves);
+    echo '</pre>';*/
+    ?>
+
+
+    <meta name="keywords" content=<?php echo $p_claves; ?>>
 
     <link rel=" icon" href="vistas/img/icono.jpg">
 
