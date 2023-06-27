@@ -109,6 +109,11 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
                 include "paginas/categorias.php";
 
             }
+            else{
+                include "paginas/404.php";
+                break;
+
+            }
         }
 
     }else{
