@@ -14,29 +14,93 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title><?php echo $blog["titulo"]; ?></title>
-
-    <meta name="title" content="<?php echo $blog["titulo"]; ?>">
-    <meta name="description" content=<?php echo $blog["descripcion"]; ?>>
-
     <?php
 
-    $palabras_claves = json_decode($blog["palabras_claves"],true);
-    //echo '<pre>'; print_r($palabras_claves); echo'</pre>';
+    $validarRuta = "";
 
-    $palabras_claves = json_decode($blog["palabras_claves"], true);
+    if (isset($_GET["pagina"])) {
 
-    $p_claves= "";
+        foreach ($categorias as $key => $value) {
+            
+            if ($_GET["pagina"] == $value["ruta_categoria"]) {
 
-    foreach($palabras_claves as $key => $value){
-        $p_claves.= $value.", ";
+                $validarRuta = "categorias";
+
+                break;
+
+            }
+
+        }
+
+        if ($validarRuta == "categorias") {
+
+
+            echo ' <title>' . $blog["titulo"] . ' | ' . $value["descripcion_categoria"] . '</title>
+
+            <meta name="title" content="' . $value["titulo_categoria"] . '>">
+            <meta name="description" content="' . $value["descripcion_categoria"] . '">';
+
+            //$palabras_claves = json_decode($blog["palabras_claves"], true);
+            //echo '<pre>'; print_r($palabras_claves); echo'</pre>';
+
+            $palabras_claves = json_decode($value["p_claves_categoria"], true);
+
+            $p_claves = "";
+
+            foreach ($palabras_claves as $key => $value) {
+                $p_claves .= $value . ", ";
+            }
+
+            $p_claves = substr($p_claves, 0, -2);
+
+            echo '<meta name="keywords" content="' . $p_claves . '">';
+        
+        } else {
+
+            echo ' <title>'.$blog["titulo"].'</title>
+
+            <meta name="title" content="'.$blog["titulo"].'>">
+            <meta name="description" content="'.$blog["descripcion"].'">';
+
+            //$palabras_claves = json_decode($blog["palabras_claves"], true);
+            //echo '<pre>'; print_r($palabras_claves); echo'</pre>';
+
+            $palabras_claves = json_decode($blog["palabras_claves"], true);
+
+            $p_claves = "";
+
+            foreach ($palabras_claves as $key => $value) {
+                $p_claves .= $value . ", ";
+            }
+
+            $p_claves = substr($p_claves, 0, -2);
+
+            echo '<meta name="keywords" content="'.$p_claves.'">';
+        
+        }
+    }else{
+
+        echo ' <title>'.$blog["titulo"].
+        '</title>
+
+        <meta name="title" content="' . $blog["titulo"] . '>">
+        <meta name="description" content="' . $blog["descripcion"] . '">';
+
+        $palabras_claves = json_decode($blog["palabras_claves"], true);
+
+        $p_claves = "";
+
+        foreach ($palabras_claves as $key => $value) {
+            $p_claves .= $value . ", ";
+        }
+
+        $p_claves = substr($p_claves, 0, -2);
+
+        echo '<meta name="keywords" content="' . $p_claves . '">';
+
+
     }
 
-    $p_claves = substr($p_claves, 0,-2);
-/*
-    echo '<pre>';
-    print_r($p_claves);
-    echo '</pre>';*/
     ?>
 
 
@@ -100,24 +164,33 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
     include "paginas/modulos/menu.php";
 
     //navegar entre paginas
+
+    $validarRuta ="";
     if(isset($_GET["pagina"])){
 
         foreach($categorias as $key => $value){
 
             if($_GET["pagina"] == $value["ruta_categoria"]){
 
-                include "paginas/categorias.php";
+                $validarRuta = "categorias";
 
-            }
-            else{
-                include "paginas/404.php";
                 break;
 
             }
         }
 
-    }else{
+        //validar las rutas
 
+        if($validarRuta == "categorias"){
+            
+            include "paginas/categorias.php";
+
+        }else{
+
+            include "paginas/404.php";
+        }
+
+    }else{
         include "paginas/inicio.php";
 
     }

@@ -1,9 +1,3 @@
-<?php
-
-include "modulos/banner.php";
-
-?>
-
 <div class="container-fluid text-center bg-white p-5">
 
     <div class="container p-5">
