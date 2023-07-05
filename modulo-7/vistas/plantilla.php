@@ -3,6 +3,8 @@ $blog = ControladorBlog::ctrMostrarBlog();
 //echo'<pre class= "bg-white">'; print_r($blog); echo '</pre>';
 $categorias = ControladorBlog::ctrMostrarCategorias();
 //echo'<pre class= "bg-white">'; print_r($categorias); echo '</pre>';
+
+$articulos = ControladorBlog::ctrMostrarConInnerJoin();
 ?>
 
 <!DOCTYPE html>
