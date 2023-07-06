@@ -5,6 +5,8 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
 //echo'<pre class= "bg-white">'; print_r($categorias); echo '</pre>';
 
 $articulos = ControladorBlog::ctrMostrarConInnerJoin();
+
+echo'<pre class= "bg-white">'; print_r($articulos); echo '</pre>';
 ?>
 
 <!DOCTYPE html>
