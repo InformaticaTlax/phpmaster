@@ -4,7 +4,7 @@ $blog = ControladorBlog::ctrMostrarBlog();
 $categorias = ControladorBlog::ctrMostrarCategorias();
 //echo'<pre class= "bg-white">'; print_r($categorias); echo '</pre>';
 
-$articulos = ControladorBlog::ctrMostrarConInnerJoin();
+$articulos =  ControladorBlog::ctrMostrarConInnerJoin();
 
 echo'<pre class= "bg-white">'; print_r($articulos); echo '</pre>';
 ?>

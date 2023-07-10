@@ -36,17 +36,20 @@ class ModeloBlog{
     }
 
     //Mostar articulos y categorias con InnerJoin
-    static public function mdlMostrarConInnerJoin($tabla1, $tabla2){
+    static public function mdlMostrarConInnerJoin($tabla1, $tabla2)
+    {
 
-        $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.*, DATE_FORMAT(fecha_artculo, '%d.%m.%Y') AS fecha_articulo FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_categoria = $tabla2.id_cat ORDER BY $tabla2.id_articulos DESC");
+            $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.*, DATE_FORMAT(fecha_articulo, '%d.%m.%Y') AS fecha_articulo FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_categoria = $tabla2.id_cat ORDER BY $tabla2.id_articulo DESC ");
 
-        $stmt->execute();
 
-        return $stmt->fetchAll();
+            $stmt->execute();
 
-        $stmt->close();
+            return $stmt->fetchAll();
+        
 
-        $stmt = null;
+            $stmt->close();
 
+            $stmt = null;
     }
+
 }
