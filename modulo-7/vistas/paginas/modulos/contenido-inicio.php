@@ -12,13 +12,14 @@ CONTENIDO INICIO
 
             <div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
 
+            <?php foreach($articulos as $key => $value): ?>
                 <!-- ARTÍCULO 01 -->
 
                 <div class="row">
 
                     <div class="col-12 col-lg-5">
 
-                        <a href="articulos.html">
+                        <a href="<?php $value["ruta_articulo"] ?>">
                             <h5 class="d-block d-lg-none py-3">Type something here</h5>
                         </a>
 
@@ -45,6 +46,10 @@ CONTENIDO INICIO
 
                 <hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 
+
+            <?php endforeach ?>
+
+                
                 <!-- ARTÍCULO 02 -->
 
                 <div class="row">
