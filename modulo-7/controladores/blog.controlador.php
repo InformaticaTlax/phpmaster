@@ -38,4 +38,15 @@ class ControladorBlog {
 
         return $respuesta;
     }
+
+    //mostrar total Artiuclos
+    static public function ctrMostrartotalArticulos(){
+
+        $tabla = "articulos";
+
+        $respuesta = ModeloBlog::mdlMostrarTotalArticulos($tabla);
+
+        return $respuesta;
+
+    }
 }

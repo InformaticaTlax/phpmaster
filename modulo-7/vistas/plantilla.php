@@ -6,6 +6,12 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
 
 $articulos =  ControladorBlog::ctrMostrarConInnerJoin(5);
 //echo'<pre class= "bg-white">'; print_r(count($articulos)); echo '</pre>';
+
+$totalArticulos = ControladorBlog::ctrMostrartotalArticulos();
+
+$totalPaginas = ceil(count($totalArticulos)/5);
+
+echo'<pre class= "bg-white">'; print_r($totalPaginas); echo '</pre>';
 ?>
 
 <!DOCTYPE html>

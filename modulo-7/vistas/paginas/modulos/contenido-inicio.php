@@ -53,7 +53,7 @@ CONTENIDO INICIO
 
                 <div class="container d-none d-md-block">
 
-                    <ul class="pagination justify-content-center"></ul>
+                    <ul class="pagination justify-content-center" totalPaginas= "<?php echo $totalPaginas; ?>"></ul>
 
                 </div>
 

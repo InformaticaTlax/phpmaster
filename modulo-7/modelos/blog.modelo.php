@@ -52,4 +52,18 @@ class ModeloBlog{
             $stmt = null;
     }
 
+    //mostrar total articulos
+
+    static public function mdlMostrarTotalArticulos($tabla){
+        $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        $stm -> execute();
+
+        return $stm -> fetchAll();
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
 }
