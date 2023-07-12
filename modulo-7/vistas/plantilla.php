@@ -11,7 +11,7 @@ $totalArticulos = ControladorBlog::ctrMostrartotalArticulos();
 
 $totalPaginas = ceil(count($totalArticulos)/5);
 
-echo'<pre class= "bg-white">'; print_r($totalPaginas); echo '</pre>';
+//echo'<pre class= "bg-white">'; print_r($totalPaginas); echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -210,6 +210,7 @@ echo'<pre class= "bg-white">'; print_r($totalPaginas); echo '</pre>';
 
     ?>
 
+    <input type="hidden" id="rutaActual" value ="<?php echo $blog["dominio"]; ?>">
     <script src="vistas/js/script.js"></script>
 
 

@@ -95,6 +95,7 @@ PAGINACIÓN
 =============================================*/
 
 var totalPages = Number($(".pagination").attr("totalPaginas"));
+var rutaActual = $("#rutaActual").val();
 
 $(".pagination").twbsPagination({
 	totalPages: totalPages,
@@ -104,7 +105,11 @@ $(".pagination").twbsPagination({
 	prev: '<i class="fas fa-angle-left"></i>',
 	next: '<i class="fas fa-angle-right"></i>'
 
-});
+}).on("page", function(evt, page){
+
+	window.location = rutaActual+page;
+
+})
 
 
 /*=============================================
