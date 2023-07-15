@@ -95,10 +95,12 @@ PAGINACIÓN
 =============================================*/
 
 var totalPages = Number($(".pagination").attr("totalPaginas"));
+var paginaActual = Number($(".pagination").attr("totalPaginas"));
 var rutaActual = $("#rutaActual").val();
 
 $(".pagination").twbsPagination({
 	totalPages: totalPages,
+	startPage: paginaActual,
 	visiblePages: 4,
 	first: "Primero",
 	last: "Último",

@@ -4,7 +4,7 @@ $blog = ControladorBlog::ctrMostrarBlog();
 $categorias = ControladorBlog::ctrMostrarCategorias();
 //echo'<pre class= "bg-white">'; print_r($categorias); echo '</pre>';
 
-$articulos =  ControladorBlog::ctrMostrarConInnerJoin(5);
+$articulos =  ControladorBlog::ctrMostrarConInnerJoin(0,5);
 //echo'<pre class= "bg-white">'; print_r(count($articulos)); echo '</pre>';
 
 $totalArticulos = ControladorBlog::ctrMostrartotalArticulos();
@@ -177,15 +177,26 @@ $totalPaginas = ceil(count($totalArticulos)/5);
     $validarRuta ="";
     if(isset($_GET["pagina"])){
 
-        foreach($categorias as $key => $value){
+        if(is_numeric($_GET["pagina"])){
 
-            if($_GET["pagina"] == $value["ruta_categoria"]){
+            $desde = ($_GET["pagina"] -1)*5;
 
-                $validarRuta = "categorias";
+            $cantidad = 5;
 
-                break;
+            $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad);
+            
 
-            }
+        }else
+
+            foreach ($categorias as $key => $value) {
+
+                if ($_GET["pagina"] == $value["ruta_categoria"]) {
+
+                    $validarRuta = "categorias";
+
+                    break;
+                }
+        
         }
 
         //validar las rutas
@@ -193,6 +204,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
         if($validarRuta == "categorias"){
             
             include "paginas/categorias.php";
+
+        } elseif (is_numeric($_GET["pagina"])){
+
+            include "paginas/inicio.php";
 
         }else{
 
