@@ -175,6 +175,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
     //navegar entre paginas
 
     $validarRuta ="";
+    
     if(isset($_GET["pagina"])){
 
         if(is_numeric($_GET["pagina"])){
@@ -186,7 +187,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
             $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad);
             
 
-        }else
+        }else{
 
             foreach ($categorias as $key => $value) {
 
@@ -197,6 +198,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
                     break;
                 }
         
+            }
         }
 
         //validar las rutas
