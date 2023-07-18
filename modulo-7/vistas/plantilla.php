@@ -4,7 +4,7 @@ $blog = ControladorBlog::ctrMostrarBlog();
 $categorias = ControladorBlog::ctrMostrarCategorias();
 //echo'<pre class= "bg-white">'; print_r($categorias); echo '</pre>';
 
-$articulos =  ControladorBlog::ctrMostrarConInnerJoin(0,5);
+$articulos =  ControladorBlog::ctrMostrarConInnerJoin(0,5,null,null);
 //echo'<pre class= "bg-white">'; print_r(count($articulos)); echo '</pre>';
 
 $totalArticulos = ControladorBlog::ctrMostrartotalArticulos();
@@ -207,7 +207,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
             
             include "paginas/categorias.php";
 
-        } elseif (is_numeric($_GET["pagina"])){
+        } elseif (is_numeric($_GET["pagina"]) && $_GET["pagina"] <= $totalPaginas){
 
             include "paginas/inicio.php";
 

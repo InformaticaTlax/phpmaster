@@ -1,3 +1,16 @@
+<?php
+
+//seleccinar los articulos de la categoria especifica
+
+if(isset($_GET["pagina"])){
+
+    $articulos =  ControladorBlog::ctrMostrarConInnerJoin(0, 5, "ruta_categoria", $_GET["pagina"]);
+    echo'<pre class= "bg-white">'; print_r(count($articulos)); echo '</pre>';
+
+}
+
+?>
+
 <!--=====================================
 CONTENIDO CATEGORIA
 ======================================-->
