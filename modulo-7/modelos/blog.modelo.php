@@ -47,11 +47,12 @@ class ModeloBlog{
                 $stmt->execute();
 
                 return $stmt->fetchAll();
+
         }else{
 
             $stmt = Conexion::conectar()->prepare("SELECT $tabla1.*, $tabla2.*, DATE_FORMAT(fecha_articulo, '%d.%m.%Y') AS fecha_articulo FROM $tabla1 INNER JOIN $tabla2 ON $tabla1.id_categoria = $tabla2.id_cat  WHERE $item = :$item ORDER BY $tabla2.id_articulo DESC LIMIT $desde, $cantidad");
-            
-            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
             $stmt->execute();
 

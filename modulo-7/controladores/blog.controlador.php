@@ -34,7 +34,7 @@ class ControladorBlog {
         $tabla1 = "categorias";
         $tabla2 = "articulos";
 
-        $respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1 , $tabla2, $desde, $cantidad,$item, $valor);
+        $respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1 , $tabla2, $desde, $cantidad, $item, $valor);
 
         return $respuesta;
     }
