@@ -26,9 +26,10 @@ $totalPaginas = ceil(count($totalArticulos)/5);
     <?php
 
     $validarRuta = "";
-
+ 
     if (isset($_GET["pagina"])) {
 
+        
         foreach ($categorias as $key => $value) {
             
             if ($_GET["pagina"] == $value["ruta_categoria"]) {
@@ -177,6 +178,12 @@ $totalPaginas = ceil(count($totalArticulos)/5);
     $validarRuta ="";
     
     if(isset($_GET["pagina"])){
+
+        $rutas = explode("/", $_GET["pagina"]);
+
+        echo '<pre class= "bg-white">';
+        print_r($rutas);
+        echo '</pre>';
 
         if(is_numeric($_GET["pagina"])){
 
