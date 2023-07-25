@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_GET["pagina"]) && is_numeric($_GET["pagina"])) {
-    $paginaActual = $_GET["pagina"];
+if (isset($rutas[0]) && is_numeric($rutas[0])) {
+    $paginaActual = $rutas[0];
 } else {
 
     $paginaActual = 1;

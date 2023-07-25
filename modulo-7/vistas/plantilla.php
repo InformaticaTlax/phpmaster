@@ -116,7 +116,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
     <meta name="keywords" content=<?php echo $p_claves; ?>>
 
-    <link rel=" icon" href="vistas/img/icono.jpg">
+    <link rel=" icon" href="<?php echo $blog["dominio"];?>vistas/img/icono.jpg">
 
     <!--=====================================
 	PLUGINS DE CSS
@@ -181,13 +181,11 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
         $rutas = explode("/", $_GET["pagina"]);
 
-        echo '<pre class= "bg-white">';
-        print_r($rutas);
-        echo '</pre>';
+        //echo '<pre class= "bg-white">'; print_r($rutas); echo '</pre>';
 
-        if(is_numeric($_GET["pagina"])){
+        if(is_numeric($rutas[0])){
 
-            $desde = ($_GET["pagina"] -1)*5;
+            $desde = ($rutas[0] -1)*5;
 
             $cantidad = 5;
 
@@ -198,7 +196,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
             foreach ($categorias as $key => $value) {
 
-                if ($_GET["pagina"] == $value["ruta_categoria"]) {
+                if ($rutas[0] == $value["ruta_categoria"]) {
 
                     $validarRuta = "categorias";
 
@@ -214,7 +212,8 @@ $totalPaginas = ceil(count($totalArticulos)/5);
             
             include "paginas/categorias.php";
 
-        } elseif (is_numeric($_GET["pagina"]) && $_GET["pagina"] <= $totalPaginas){
+        } elseif (is_numeric($rutas[0]) && $rutas[0] <= $totalPaginas || 
+                  is_numeric($rutas[1])){
 
             include "paginas/inicio.php";
 
