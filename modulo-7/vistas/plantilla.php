@@ -131,9 +131,9 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
     <!-- JdSlider -->
     <!-- https://www.jqueryscript.net/slider/Carousel-Slideshow-jdSlider.html -->
-    <link rel="stylesheet" href="vistas/css/plugins/jquery.jdSlider.css">
+    <link rel="stylesheet" href="<?php echo $blog["dominio"];?>vistas/css/plugins/jquery.jdSlider.css">
 
-    <link rel="stylesheet" href="vistas/css/style.css">
+    <link rel="stylesheet" href="<?php echo $blog["dominio"];?>vistas/css/style.css">
 
     <!--=====================================
 	PLUGINS DE JS
@@ -150,17 +150,17 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
     <!-- JdSlider -->
     <!-- https://www.jqueryscript.net/slider/Carousel-Slideshow-jdSlider.html -->
-    <script src="vistas/js/plugins/jquery.jdSlider-latest.js"></script>
+    <script src="<?php echo $blog["dominio"];?>vistas/js/plugins/jquery.jdSlider-latest.js"></script>
 
     <!-- pagination -->
     <!-- http://josecebe.github.io/twbs-pagination/ -->
-    <script src="vistas/js/plugins/pagination.min.js"></script>
+    <script src="<?php echo $blog["dominio"];?>vistas/js/plugins/pagination.min.js"></script>
 
     <!-- scrollup -->
     <!-- https://markgoodyear.com/labs/scrollup/ -->
     <!-- https://easings.net/es# -->
-    <script src="vistas/js/plugins/scrollUP.js"></script>
-    <script src="vistas/js/plugins/jquery.easing.js"></script>
+    <script src="<?php echo $blog["dominio"];?>vistas/js/plugins/scrollUP.js"></script>
+    <script src="<?php echo $blog["dominio"];?>vistas/js/plugins/jquery.easing.js"></script>
 
 </head>
 
@@ -235,7 +235,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
     ?>
 
     <input type="hidden" id="rutaActual" value ="<?php echo $blog["dominio"]; ?>">
-    <script src="vistas/js/script.js"></script>
+    <script src="<?php echo $blog["dominio"];?>vistas/js/script.js"></script>
 
 
 </body>
