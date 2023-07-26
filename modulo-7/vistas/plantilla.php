@@ -189,7 +189,7 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
             $cantidad = 5;
 
-            $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad);
+            $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, null , null);
             
 
         }else{
