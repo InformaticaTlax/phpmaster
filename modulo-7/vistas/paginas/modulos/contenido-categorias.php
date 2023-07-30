@@ -8,16 +8,25 @@ if (isset($rutas[0])) {
     /*echo '<pre class= "bg-white">';
     print_r($articulos);
     echo '</pre>';*/
+
+    $totalArticulos
 }
 
 //revisar ssi viene paginacion
 if(isset($rutas[1]) && is_numeric($rutas[1])){
+
+    $paginaActual = $rutas[1];
 
     $desde = ($rutas[1] -1)*5;
 
     $cantidad = 5;
 
     $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0])); 
+
+}else{
+
+    $paginaActual = 1;
+
 
 }
 
@@ -89,7 +98,7 @@ CONTENIDO CATEGORIA
                 
                 <div class="container d-none d-md-block">
 
-                    <ul class="pagination justify-content-center"></ul>
+                    <ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>" paginaActual="<?php echo $paginaActual; ?>"></ul>
 
                 </div>
 
