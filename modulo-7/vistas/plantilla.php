@@ -7,7 +7,7 @@ $categorias = ControladorBlog::ctrMostrarCategorias();
 $articulos =  ControladorBlog::ctrMostrarConInnerJoin(0,5,null,null);
 //echo'<pre class= "bg-white">'; print_r(count($articulos)); echo '</pre>';
 
-$totalArticulos = ControladorBlog::ctrMostrartotalArticulos();
+$totalArticulos = ControladorBlog::ctrMostrartotalArticulos(null, null);
 
 $totalPaginas = ceil(count($totalArticulos)/5);
 

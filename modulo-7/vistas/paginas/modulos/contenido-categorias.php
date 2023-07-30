@@ -9,7 +9,9 @@ if (isset($rutas[0])) {
     print_r($articulos);
     echo '</pre>';*/
 
-    $totalArticulos
+    $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulos[0]["id_cat"]);
+
+    $totalPaginas = ceil(count($totalArticulos)/5);
 }
 
 //revisar ssi viene paginacion

@@ -69,12 +69,25 @@ class ModeloBlog{
 
     //mostrar total articulos
 
-    static public function mdlMostrarTotalArticulos($tabla){
-        $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+    static public function mdlMostrarTotalArticulos($tabla, $item, $valor ){
 
-        $stm -> execute();
+        if($item == null && $valor == null){
 
-        return $stm -> fetchAll();
+            $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+            $stm -> execute();
+
+            return $stm -> fetchAll();
+        }else{
+
+            $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+            $stm -> execute();
+
+            return $stm -> fetchAll();
+        }
 
         $stmt->close();
 
