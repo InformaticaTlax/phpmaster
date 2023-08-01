@@ -11,7 +11,7 @@ if (isset($rutas[0])) {
 
     $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulos[0]["id_cat"]);
 
-    $totalPaginas = ceil(count($totalArticulos)/5);
+	$totalPaginas = ceil(count($totalArticulos)/5);
 }
 
 //revisar ssi viene paginacion
@@ -100,7 +100,7 @@ CONTENIDO CATEGORIA
                 
                 <div class="container d-none d-md-block">
 
-                    <ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>" paginaActual="<?php echo $paginaActual; ?>"></ul>
+                    <ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>" paginaActual="<?php echo $paginaActual; ?>" rutaPagina = "<?php  echo $articulos[0]["ruta_categoria"]; ?>"></ul>
 
                 </div>
 
