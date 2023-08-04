@@ -73,20 +73,20 @@ class ModeloBlog{
 
         if($item == null && $valor == null){
 
-            $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 
-            $stm -> execute();
+            $stmt -> execute();
 
-            return $stm -> fetchAll();
+            return $stmt -> fetchAll();
         }else{
 
-            $stm = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id_articulo DESC");
 
-            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
-            $stm -> execute();
+            $stmt -> execute();
 
-            return $stm -> fetchAll();
+            return $stmt -> fetchAll();
         }
 
         $stmt->close();

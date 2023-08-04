@@ -98,21 +98,33 @@ var totalPaginas = Number($(".pagination").attr("totalPaginas"));
 var paginaActual = Number($(".pagination").attr("paginaActual"));
 var rutaActual = $("#rutaActual").val();
 
-$(".pagination").twbsPagination({
-	totalPages: totalPaginas,
-	startPage: paginaActual,
-	visiblePages: 4,
-	first: "Primero",
-	last: "Último",
-	prev: '<i class="fas fa-angle-left"></i>',
-	next: '<i class="fas fa-angle-right"></i>'
+if($(".pagination").length != 0){
 
-}).on("page", function(evt, page){
+	$(".pagination").twbsPagination({
+		totalPages: totalPaginas,
+		startPage: paginaActual,
+		visiblePages: 4,
+		first: "Primero",
+		last: "Último",
+		prev: '<i class="fas fa-angle-left"></i>',
+		next: '<i class="fas fa-angle-right"></i>'
 
-	window.location = rutaActual+page;
+	}).on("page", function(evt, page){
 
-})
 
+		if(rutaPagina != ""){
+
+			window.location = rutaActual+rutaPagina+"/"+page;
+
+		}else{
+
+			window.location = rutaActual+page;
+
+		}
+			
+
+	})
+}
 
 /*=============================================
 SCROLL UP
