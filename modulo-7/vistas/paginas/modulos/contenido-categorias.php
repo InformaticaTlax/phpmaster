@@ -17,6 +17,17 @@ if (isset($rutas[0])) {
 //revisar ssi viene paginacion
 if(isset($rutas[1]) && is_numeric($rutas[1])){
 
+    if($rutas[1] > $totalPaginas){
+
+        echo '<script>
+
+            windows.locarion = "'.$blog["dominio"].'/error"
+        
+        </script>';
+
+        return;
+    }
+
     $paginaActual = $rutas[1];
 
     $desde = ($rutas[1] -1)*5;
@@ -46,9 +57,9 @@ CONTENIDO CATEGORIA
 
         <ul class="breadcrumb bg-white p-0 mb-2 mb-md-4">
 
-            <li class="breadcrumb-item inicio"><a href="index.html">Inicio</a></li>
+            <li class="breadcrumb-item inicio"><a href="<?php echo $blog["dominio"]; ?>">Inicio</a></li>
 
-            <li class="breadcrumb-item active">Mi viaje por Suramérica</li>
+            <li class="breadcrumb-item active"><?php echo $articulos[0]["descripcion_categoria"] ?></li>
 
         </ul>
 
@@ -116,28 +127,18 @@ CONTENIDO CATEGORIA
 
                     <h4>Etiquetas</h4>
 
+                    <?php 
 
-                    <a href="#suramerica" class="btn btn-secondary btn-sm m-1">suramerica</a>
+						$tags = json_decode($articulos[0]["p_claves_categoria"], true);
 
-                    <a href="#colombia" class="btn btn-secondary btn-sm m-1">colombia</a>
+					 ?>
 
-                    <a href="#peru" class="btn btn-secondary btn-sm m-1">peru</a>
+					 <?php foreach ($tags as $key => $value): ?>
 
-                    <a href="#argentina" class="btn btn-secondary btn-sm m-1">argentina</a>
+					 	<a href="<?php echo $blog["dominio"].preg_replace('/[0-9ñÑáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a> 
+					 	
+					 <?php endforeach ?>
 
-                    <a href="#chile" class="btn btn-secondary btn-sm m-1">chile</a>
-
-                    <a href="#brasil" class="btn btn-secondary btn-sm m-1">brasil</a>
-
-                    <a href="#ecuador" class="btn btn-secondary btn-sm m-1">ecuador</a>
-
-                    <a href="#venezuela" class="btn btn-secondary btn-sm m-1">venezuela</a>
-
-                    <a href="#paraguay" class="btn btn-secondary btn-sm m-1">paraguay</a>
-
-                    <a href="#uruguay" class="btn btn-secondary btn-sm m-1">uruguay</a>
-
-                    <a href="#bolivia" class="btn btn-secondary btn-sm m-1">bolivia</a>
 
                 </div>
 

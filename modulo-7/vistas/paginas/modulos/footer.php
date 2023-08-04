@@ -20,13 +20,13 @@ FOOTER
 
                             <div class="d-flex flex-column columna1">
 
-                                <figure class="p-2 m-0 photo1" vinculo="<?php echo $categorias[0]["ruta_categoria"] ?>" style="background:url(<?php echo $categorias[0]["img_categoria"] ?>)">
+                                <figure class="p-2 m-0 photo1" vinculo="<?php echo $categorias[0]["ruta_categoria"] ?>" style="background:url(<?php echo $blog["dominio"].$categorias[0]["img_categoria"] ?>)">
 
-                                    <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $categorias[0]["titulo_categoria"] ?></p>
+                                    <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $blog["dominio"].$categorias[0]["titulo_categoria"] ?></p>
 
                                 </figure>
 
-                                <figure class="p-2 m-0 photo2" vinculo="<?php echo $categorias[4]["ruta_categoria"] ?>" style="background:url(<?php echo $categorias[4]["img_categoria"] ?>)">
+                                <figure class="p-2 m-0 photo2" vinculo="<?php echo $categorias[4]["ruta_categoria"] ?>" style="background:url(<?php echo $blog["dominio"].$categorias[4]["img_categoria"] ?>)">
 
                                     <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $categorias[4]["titulo_categoria"] ?></p>
 
@@ -38,13 +38,13 @@ FOOTER
 
                                 <div class="d-block d-md-flex">
 
-                                    <figure class="p-2 m-0 flex-fill photo3" vinculo="<?php echo $categorias[1]["ruta_categoria"] ?>" style="background:url(<?php echo $categorias[1]["img_categoria"] ?>)">
+                                    <figure class="p-2 m-0 flex-fill photo3" vinculo="<?php echo $categorias[1]["ruta_categoria"] ?>" style="background:url(<?php echo $blog["dominio"].$categorias[1]["img_categoria"] ?>)">
 
                                         <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $categorias[1]["titulo_categoria"] ?></p>
 
                                     </figure>
 
-                                    <figure class="p-2 m-0 flex-fill photo4" vinculo="<?php echo $categorias[3]["ruta_categoria"] ?>" style="background:url(<?php echo $categorias[3]["img_categoria"] ?>)">
+                                    <figure class="p-2 m-0 flex-fill photo4" vinculo="<?php echo $categorias[3]["ruta_categoria"] ?>" style="background:url(<?php echo $blog["dominio"].$categorias[3]["img_categoria"] ?>)">
 
                                         <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $categorias[3]["titulo_categoria"] ?></p>
 
@@ -52,7 +52,7 @@ FOOTER
 
                                 </div>
 
-                                <figure class="p-2 m-0 photo5" vinculo="<?php echo $categorias[2]["ruta_categoria"] ?>" style="background:url(<?php echo $categorias[2]["img_categoria"] ?>)">
+                                <figure class="p-2 m-0 photo5" vinculo="<?php echo $categorias[2]["ruta_categoria"] ?>" style="background:url(<?php echo $blog["dominio"].$categorias[2]["img_categoria"] ?>)">
 
                                     <p class="text-uppercase p-1 p-md-2 p-xl-1 small"><?php echo $categorias[2]["titulo_categoria"] ?></p>
 
@@ -92,36 +92,23 @@ FOOTER
 
                     <ul class="d-flex justify-content-left p-0">
 
-                        <li>
-                            <a href="https://www.facebook.com" target="_blank">
-                                <i class="fab fa-facebook-f lead text-white mr-3 mr-sm-4"></i>
-                            </a>
-                        </li>
+                        <?php
 
-                        <li>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-instagram lead text-white mr-3 mr-sm-4"></i>
-                            </a>
-                        </li>
+                            $redesSociales = json_decode($blog["redes_sociales"], true);
 
-                        <li>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-twitter lead text-white mr-3 mr-sm-4"></i>
-                            </a>
-                        </li>
+                            foreach($redesSociales as $key => $value){
+                                
 
-                        <li>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-youtube lead text-white mr-3 mr-sm-4"></i>
-                            </a>
-                        </li>
+                                echo'<li>
+                                    <a href="'. $value["url"].'" target="_blank">
+                                        <i class="'.$value["icono"].' lead  text-white mr-3 mr-sm-4"></i>
+                                    </a>
+                                </li>';
 
-                        <li>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-snapchat-ghost lead text-white mr-3 mr-sm-4"></i>
-                            </a>
-                        </li>
-
+                            }
+                        
+                        ?>
+                       
                     </ul>
 
                 </div>
