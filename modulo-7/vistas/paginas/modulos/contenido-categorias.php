@@ -15,30 +15,43 @@ if (isset($rutas[0])) {
 }
 
 //revisar ssi viene paginacion
-if(isset($rutas[1]) && is_numeric($rutas[1])){
+if(isset($rutas[1])){
+    
+    if(is_numeric($rutas[1])){
 
-    if($rutas[1] > $totalPaginas){
+        if($rutas[1] > $totalPaginas){
+
+            echo '<script>
+
+                windows.locarion = "'.$blog["dominio"].'/error404"
+            
+            </script>';
+
+            return;
+        }
+    
+
+        $paginaActual = $rutas[1];
+
+        $desde = ($rutas[1] -1)*5;
+
+        $cantidad = 5;
+
+        $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0])); 
+    }else{
 
         echo '<script>
 
-            windows.locarion = "'.$blog["dominio"].'/error"
-        
-        </script>';
+                windows.locarion = "'.$blog["dominio"].'/error404"
+            
+            </script>';
 
         return;
-    }
+    }    
 
-    $paginaActual = $rutas[1];
+    }else{
 
-    $desde = ($rutas[1] -1)*5;
-
-    $cantidad = 5;
-
-    $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0])); 
-
-}else{
-
-    $paginaActual = 1;
+        $paginaActual = 1;
 
 
 }

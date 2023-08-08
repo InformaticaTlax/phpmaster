@@ -29,10 +29,11 @@ $totalPaginas = ceil(count($totalArticulos)/5);
  
     if (isset($_GET["pagina"])) {
 
-        
+        $rutas = explode("/", $_GET["pagina"]);
+
         foreach ($categorias as $key => $value) {
             
-            if ($_GET["pagina"] == $value["ruta_categoria"]) {
+            if (!is_numeric($rutas[0]) && $rutas[0] == $value["ruta_categoria"]  ) {
 
                 $validarRuta = "categorias";
 
@@ -218,13 +219,20 @@ $totalPaginas = ceil(count($totalArticulos)/5);
 
         }else if(isset($rutas[1]) && is_numeric($rutas[1])){
 
+            include "paginas/inicio.php";
+        }
+        
+        else{
+
             include "paginas/404.php";
+
         }
 
-    }else{
-        include "paginas/inicio.php";
+        }else{  
+        
+            include "paginas/inicio.php";
 
-    }
+        }
 
     //modulos fijos inferiores
     include "paginas/modulos/footer.php";
