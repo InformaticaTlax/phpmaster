@@ -8,4 +8,3 @@ require_once "modelos/blog.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla->ctrTraerPlantilla();
-//holas

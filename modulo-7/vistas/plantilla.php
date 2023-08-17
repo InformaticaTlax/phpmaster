@@ -207,32 +207,62 @@ $totalPaginas = ceil(count($totalArticulos)/5);
             }
         }
 
-        //validar las rutas
+        /*=============================================
+		Indice 1: Rutas de Artículos o Paginación de categorías
+		=============================================*/
 
-        if($validarRuta == "categorias"){
-            
-            include "paginas/categorias.php";
+        if (isset($rutas[1])) {
 
-        } elseif (is_numeric($rutas[0]) && $rutas[0] <= $totalPaginas ){
+            if (is_numeric($rutas[1])) {
 
-            include "paginas/inicio.php";
+                $desde = ($rutas[1] - 1) * 5;
 
-        }else if(isset($rutas[1]) && is_numeric($rutas[1])){
+                $cantidad = 5;
 
-            include "paginas/inicio.php";
+                $articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, null, null);
+            } else {
+
+                foreach ($totalArticulos as $key => $value) {
+
+                    if ($rutas[1] == $value["ruta_articulo"]) {
+
+                        $validarRuta = "articulos";
+
+                        break;
+                    }
+                }
+            }
         }
-        
-        else{
+
+        /*=============================================
+		Validar las rutas
+		=============================================*/
+        if ($validarRuta == "categorias") {
+
+            include "paginas/categorias.php";
+        } else if ($validarRuta == "buscador") {
+
+            include "paginas/buscador.php";
+        } else if ($validarRuta == "sobre-mi") {
+
+            include "paginas/sobre-mi.php";
+        } else if ($validarRuta == "articulos") {
+
+            include "paginas/articulos.php";
+        } else if (is_numeric($rutas[0]) && $rutas[0] <= $totalPaginas) {
+
+            include "paginas/inicio.php";
+        } else if (isset($rutas[1]) && is_numeric($rutas[1])) {
+
+            include "paginas/inicio.php";
+        } else {
 
             include "paginas/404.php";
-
         }
+    } else {
 
-        }else{  
-        
-            include "paginas/inicio.php";
-
-        }
+        include "paginas/inicio.php";
+    }
 
     //modulos fijos inferiores
     include "paginas/modulos/footer.php";

@@ -4,56 +4,52 @@
 
 if (isset($rutas[0])) {
 
-    $articulos =  ControladorBlog::ctrMostrarConInnerJoin(0, 5, "ruta_categoria", isset($rutas[0]));
-    /*echo '<pre class= "bg-white">';
-    print_r($articulos);
-    echo '</pre>';*/
+    $articulos = ControladorBlog::ctrMostrarConInnerJoin(0, 5, "ruta_categoria", $rutas[0]);
 
-    $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulos[0]["id_cat"]);
+    $totalArticulos = ControladorBlog::ctrMostrarTotalArticulos("id_cat", $articulos[0]["id_cat"]);
 
-	$totalPaginas = ceil(count($totalArticulos)/5);
+    $totalPaginas = ceil(count($totalArticulos) / 5);
+
+    //$articulosDestacados = ControladorBlog::ctrArticulosDestacados("id_cat", $articulos[0]["id_cat"]);
 }
 
 //revisar ssi viene paginacion
-if(isset($rutas[1])){
-    
-    if(is_numeric($rutas[1])){
+if (isset($rutas[1])) {
 
-        if($rutas[1] > $totalPaginas){
+    if (is_numeric($rutas[1])) {
+
+        if ($rutas[1] > $totalPaginas) {
 
             echo '<script>
 
-                windows.locarion = "'.$blog["dominio"].'/error404"
+                windows.locarion = "' . $blog["dominio"] . '/error404"
             
             </script>';
 
             return;
         }
-    
+
 
         $paginaActual = $rutas[1];
 
-        $desde = ($rutas[1] -1)*5;
+        $desde = ($rutas[1] - 1) * 5;
 
         $cantidad = 5;
 
-        $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0])); 
-    }else{
+        $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0]));
+    } else {
 
         echo '<script>
 
-                windows.locarion = "'.$blog["dominio"].'/error404"
+                windows.locarion = "' . $blog["dominio"] . '/error404"
             
             </script>';
 
         return;
-    }    
+    }
+} else {
 
-    }else{
-
-        $paginaActual = 1;
-
-
+    $paginaActual = 1;
 }
 
 ?>
@@ -91,23 +87,23 @@ CONTENIDO CATEGORIA
 
                         <div class="col-12 col-lg-5">
 
-                            <a href="<?php echo $value["ruta_articulo"]; ?>">
+                            <a href="<?php echo $blog["dominio"] . $value["ruta_categoria"] . "/" . $value["ruta_articulo"]; ?>">
                                 <h5 class="d-block d-lg-none py-3"><?php echo $value["titulo_articulo"]; ?></h5>
                             </a>
 
-                            <a href="<?php echo $value["ruta_articulo"]; ?>"><img src="<?php echo $blog["dominio"]; ?><?php echo $value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid" width="100%"></a>
+                            <a href="<?php echo $blog["dominio"] . $value["ruta_categoria"] . "/" . $value["ruta_articulo"]; ?>"><img src="<?php echo $blog["dominio"]; ?><?php echo $value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid" width="100%"></a>
 
                         </div>
 
                         <div class="col-12 col-lg-7 introArticulo">
 
-                            <a href="<?php echo $value["ruta_articulo"]; ?>">
+                            <a href="<?php echo $blog["dominio"].$value["ruta_categoria"]."/".$value["ruta_articulo"]; ?>">
                                 <h4 class="d-none d-lg-block"><?php echo $value["titulo_articulo"]; ?></h4>
                             </a>
 
                             <p class="my-2 my-lg-5"><?php echo $value["descripcion_articulo"]; ?></p>
 
-                            <a href="<?php echo $value["ruta_articulo"]; ?>" class="float-right">Leer Más</a>
+                            <a href="<?php echo $blog["dominio"].$value["ruta_categoria"]."/".$value["ruta_articulo"]; ?>" class="float-right">Leer Más</a>
 
                             <div class="fecha"><?php echo $value["fecha_articulo"]; ?></div>
 
@@ -120,11 +116,11 @@ CONTENIDO CATEGORIA
 
 
                 <?php endforeach ?>
-                
-                
+
+
                 <div class="container d-none d-md-block">
 
-                    <ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>" paginaActual="<?php echo $paginaActual; ?>" rutaPagina = "<?php  echo $articulos[0]["ruta_categoria"]; ?>"></ul>
+                    <ul class="pagination justify-content-center" totalPaginas="<?php echo $totalPaginas; ?>" paginaActual="<?php echo $paginaActual; ?>" rutaPagina="<?php echo $articulos[0]["ruta_categoria"]; ?>"></ul>
 
                 </div>
 
@@ -140,17 +136,17 @@ CONTENIDO CATEGORIA
 
                     <h4>Etiquetas</h4>
 
-                    <?php 
+                    <?php
 
-						$tags = json_decode($articulos[0]["p_claves_categoria"], true);
+                    $tags = json_decode($articulos[0]["p_claves_categoria"], true);
 
-					 ?>
+                    ?>
 
-					 <?php foreach ($tags as $key => $value): ?>
+                    <?php foreach ($tags as $key => $value) : ?>
 
-					 	<a href="<?php echo $blog["dominio"].preg_replace('/[0-9ñÑáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a> 
-					 	
-					 <?php endforeach ?>
+                        <a href="<?php echo $blog["dominio"] . preg_replace('/[0-9ñÑáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
+
+                    <?php endforeach ?>
 
 
                 </div>
