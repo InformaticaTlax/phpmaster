@@ -18,7 +18,7 @@ CONTENIDO ARTÍCULO
 
         <!-- BREADCRUMB -->
 
-        <a href="categorias.html">
+        <a href="<?php echo $articulo[0]["ruta_categoria"]; ?>">
 
             <button class="d-block d-sm-none btn btn-info btn-sm mb-2">
 
@@ -30,11 +30,11 @@ CONTENIDO ARTÍCULO
 
         <ul class="breadcrumb bg-white p-0 mb-2 mb-md-4 breadArticulo">
 
-            <li class="breadcrumb-item inicio"><a href="index.html">Inicio</a></li>
+            <li class="breadcrumb-item inicio"><a href="<?php $blog["dominio"]; ?>">Inicio</a></li>
 
-            <li class="breadcrumb-item"><a href="categorias.html">Mi viaje por Suramérica</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]; ?>"><?php echo $articulo[0]["descripcion_categoria"]; ?></a></li>
 
-            <li class="breadcrumb-item active">Type something here</li>
+            <li class="breadcrumb-item active"><?php echo $articulo[0]["titulo_articulo"]; ?></li>
 
         </ul>
 
@@ -107,27 +107,18 @@ CONTENIDO ARTÍCULO
 
                         <h4>Etiquetas</h4>
 
-                        <a href="#suramerica" class="btn btn-secondary btn-sm m-1">suramerica</a>
+                        <?php
 
-                        <a href="#colombia" class="btn btn-secondary btn-sm m-1">colombia</a>
+                        $tags = json_decode($articulos[0]["p_claves_articulo"], true);
 
-                        <a href="#peru" class="btn btn-secondary btn-sm m-1">peru</a>
+                        ?>
 
-                        <a href="#argentina" class="btn btn-secondary btn-sm m-1">argentina</a>
+                        <?php foreach ($tags as $key => $value) : ?>
 
-                        <a href="#chile" class="btn btn-secondary btn-sm m-1">chile</a>
+                            <a href="<?php echo $blog["dominio"] . preg_replace('/[0-9ñÑáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
 
-                        <a href="#brasil" class="btn btn-secondary btn-sm m-1">brasil</a>
+                        <?php endforeach ?>
 
-                        <a href="#ecuador" class="btn btn-secondary btn-sm m-1">ecuador</a>
-
-                        <a href="#venezuela" class="btn btn-secondary btn-sm m-1">venezuela</a>
-
-                        <a href="#paraguay" class="btn btn-secondary btn-sm m-1">paraguay</a>
-
-                        <a href="#uruguay" class="btn btn-secondary btn-sm m-1">uruguay</a>
-
-                        <a href="#bolivia" class="btn btn-secondary btn-sm m-1">bolivia</a>
 
                     </div>
 
