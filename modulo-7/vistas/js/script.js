@@ -159,5 +159,6 @@ $(".deslizadorArticulos").jdSlider({
 //compartir articulos
 
 $('.social-share').shapeShare();
+$('.social-share').shapeShare();
 
 

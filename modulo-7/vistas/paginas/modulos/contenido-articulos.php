@@ -3,6 +3,7 @@ if (isset($rutas[1])) {
 
     $articulo =  ControladorBlog::ctrMostrarConInnerJoin(0, 1, "ruta_articulo", $rutas[1]);
     //echo '<pre>'; print_r($articulo); echo '</pre>';
+    $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulo[0]["id_cat"]);
 }
 
 
@@ -97,7 +98,7 @@ CONTENIDO ARTÍCULO
 
                     </div>
 
-                    <!-- AVANZAR - RETROCEDER -->
+
 
                     <div class="clearfix"></div>
 
@@ -121,6 +122,21 @@ CONTENIDO ARTÍCULO
 
 
                     </div>
+
+                    <!-- AVANZAR - RETROCEDER -->
+
+                    <?php 
+                        foreach($totalArticulos as $key => $value){
+
+                            if($articulo[0]["id_articulo"] == $value["id_articulo"]){
+
+                                $posicion = $key;
+                                echo '<pre>'; print_r($posicion); echo '</pre>';
+
+                            }
+                        }
+                            
+                    ?>
 
                     <div class="d-md-flex justify-content-between my-3 d-none">
 
