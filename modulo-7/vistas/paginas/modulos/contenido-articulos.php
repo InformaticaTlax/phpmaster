@@ -32,7 +32,7 @@ CONTENIDO ARTÍCULO
 
             <li class="breadcrumb-item inicio"><a href="<?php $blog["dominio"]; ?>">Inicio</a></li>
 
-            <li class="breadcrumb-item"><a href="<?php echo $blog["dominio"].$articulo[0]["ruta_categoria"]; ?>"><?php echo $articulo[0]["descripcion_categoria"]; ?></a></li>
+            <li class="breadcrumb-item"><a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"]; ?>"><?php echo $articulo[0]["descripcion_categoria"]; ?></a></li>
 
             <li class="breadcrumb-item active"><?php echo $articulo[0]["titulo_articulo"]; ?></li>
 
@@ -67,13 +67,13 @@ CONTENIDO ARTÍCULO
 
                         <div class="btn-group text-secondary">
 
-                            Si te gusto compartelo:
+                            Si te gustó compártelo:
 
                         </div>
 
                         <div class="btn-group">
 
-                            <button type="button" class="btn border-0 text-white" style="background: #1475E0">
+                            <button type="button" class="btn border-0 text-white social-share" style="background: #1475E0" data-share="facebook">
 
                                 <span class="fab fa-facebook pr-1"></span>
 
@@ -85,7 +85,7 @@ CONTENIDO ARTÍCULO
 
                         <div class="btn-group">
 
-                            <button type="button" class="btn border-0 text-white" style="background: #00A6FF">
+                            <button type="button" class="btn border-0 text-white social-share" style="background: #00A6FF" data-share="twitter">
 
                                 <span class="fab fa-twitter pr-1"></span>
 
