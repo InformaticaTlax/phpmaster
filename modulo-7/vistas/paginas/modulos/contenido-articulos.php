@@ -125,24 +125,34 @@ CONTENIDO ARTÍCULO
 
                     <!-- AVANZAR - RETROCEDER -->
 
-                    <?php 
-                        foreach($totalArticulos as $key => $value){
+                    <?php
+                    foreach ($totalArticulos as $key => $value) {
 
-                            if($articulo[0]["id_articulo"] == $value["id_articulo"]){
+                        if ($articulo[0]["id_articulo"] == $value["id_articulo"]) {
 
-                                $posicion = $key;
-                                echo '<pre>'; print_r($posicion); echo '</pre>';
+                            $posicion = $key;
 
-                            }
+                            //echo '<pre>'; print_r($posicion); echo '</pre>';
+
                         }
-                            
+                    }
+
                     ?>
 
                     <div class="d-md-flex justify-content-between my-3 d-none">
+                        <?php if (($posicion - 1) > 0) : ?>
 
-                        <a href="articulos.html">Leer artículo anterior</a>
+                            <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $totalArticulos[($posicion - 1)]["ruta_articulo"] ?>">Leer artículo anterior</a>
 
-                        <a href="articulos.html">Leer artículo siguiente</a>
+                        <?php endif ?>
+
+                        <?php if (($posicion + 1) < count($totalArticulos)) : ?>
+
+                            <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $totalArticulos[($posicion + 1)]["ruta_articulo"] ?>">Leer artículo siguiente</a>
+
+                        <?php endif ?>
+
+                        
 
                     </div>
 
