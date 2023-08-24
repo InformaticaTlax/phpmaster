@@ -152,7 +152,7 @@ CONTENIDO ARTÍCULO
 
                         <?php endif ?>
 
-                        
+
 
                     </div>
 
@@ -164,64 +164,25 @@ CONTENIDO ARTÍCULO
 
                             <ul class="slide-area">
 
-                                <li class="px-3">
+                                <?php foreach ($totalArticulos as $key => $value) : ?>
 
-                                    <a href="articulos.html" class="text-secondary">
+                                    <li class="px-3">
 
-                                        <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo01.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+                                        <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $value["ruta_articulo"] ?>" class="text-secondary">
 
-                                        <h6 class="py-2">Type something here</h6>
+                                            <img src="<?php echo $blog["dominio"] . $value["portada_articulo"]; ?>" alt="<?php echo $value["titulo_articulo"]; ?>" class="img-fluid">
 
-                                    </a>
+                                            <h6 class="py-2"><?php echo $value["titulo_articulo"]; ?></h6>
 
-                                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem quibusdam sint porro...</p>
+                                        </a>
 
-                                </li>
+                                        <p class="small"><?php echo substr($value["descripcion_articulo"], 0, -110) . "..."; ?></p>
 
-                                <li class="px-3">
+                                    </li>
 
-                                    <a href="articulos.html" class="text-secondary">
-
-                                        <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo02.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-                                        <h6 class="py-2">Type something here</h6>
-
-                                    </a>
-
-                                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem quibusdam sint porro...</p>
-
-                                </li>
-
-                                <li class="px-3">
-
-                                    <a href="articulos.html" class="text-secondary">
-
-                                        <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo03.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-                                        <h6 class="py-2">Type something here</h6>
-
-                                    </a>
-
-                                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem quibusdam sint porro...</p>
-
-                                </li>
-
-                                <li class="px-3">
-
-                                    <a href="articulos.html" class="text-secondary">
-
-                                        <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo04.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-                                        <h6 class="py-2">Type something here</h6>
-
-                                    </a>
-
-                                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem quibusdam sint porro...</p>
-
-                                </li>
+                                <?php endforeach ?>
 
                             </ul>
-
                             <a class="prev" href="#">
 
                                 <i class="fas fa-angle-left text-muted"></i>
@@ -234,8 +195,8 @@ CONTENIDO ARTÍCULO
 
                             </a>
 
-                        </div>
 
+                        </div>
                         <div class="controller">
 
                             <div class="indicate-area"></div>
