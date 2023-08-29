@@ -4,6 +4,8 @@ if (isset($rutas[1])) {
     $articulo =  ControladorBlog::ctrMostrarConInnerJoin(0, 1, "ruta_articulo", $rutas[1]);
     //echo '<pre>'; print_r($articulo); echo '</pre>';
     $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulo[0]["id_cat"]);
+    $opiniones = ControladorBlog::ctrMostrarOpiniones("id_art", $articulo[0]["id_articulo"]);
+    //echo '<pre>'; print_r($opiniones); echo '</pre>';
 }
 
 
@@ -213,33 +215,67 @@ CONTENIDO ARTÍCULO
 
                     <div class="row opiniones">
 
-                        <div class="col-3 col-sm-4 col-lg-2 p-2">
+                        <?php if (count($opiniones) != 0) : ?>
 
-                            <img src="<?php echo $blog["dominio"]; ?>vistas/img/user01.jpg" class="img-thumbnail">
+                            <?php foreach ($opiniones as $key => $value) : ?>
 
-                        </div>
+                                <?php if ($value["aprobacion_opinion"] == 1) : ?>
 
-                        <div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
+                                    <div class="col-3 col-sm-4 col-lg-2 p-2">
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto beatae, aut sint provident dolorem minus recusandae facere, ipsum magnam, nostrum enim. Error quasi quod ab consectetur explicabo consequuntur obcaecati suscipit!</p>
+                                        <img src="<?php echo $blog["dominio"] . $value["foto_opinion"]; ?>" class="img-thumbnail">
 
-                            <span class="small float-right">Carla Gómez | 20.09.2018</span>
+                                    </div>
 
-                        </div>
+                                    <div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
 
-                        <div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
+                                        <p><?php echo $value["contenido_opinion"]; ?></p>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto beatae, aut sint provident dolorem minus recusandae facere, ipsum magnam, nostrum enim. Error quasi quod ab consectetur explicabo consequuntur obcaecati suscipit!</p>
+                                        <?php
 
-                            <span class="small float-right">Juanito Travel | 20.09.2018</span>
+                                        $formatoFecha = strtotime($value["fecha_opinion"]);
+                                        $formatoFecha = date('d.m.Y', $formatoFecha);
 
-                        </div>
+                                        ?>
 
-                        <div class="col-3 col-sm-4 col-lg-2 p-2">
+                                        <span class="small float-right"><?php echo $value["nombre_opinion"]; ?> | <?php echo $formatoFecha; ?></span>
 
-                            <img src="<?php echo $blog["dominio"]; ?>vistas/img/user02.jpg" class="img-thumbnail">
+                                    </div>
 
-                        </div>
+                                    <?php if ($value["respuesta_opinion"] != null) : ?>
+
+                                        <div class="col-9 col-sm-8 col-lg-10 p-2 text-muted">
+
+                                            <p><?php echo $value["respuesta_opinion"]; ?></p>
+
+                                            <?php
+
+                                            $formatoFechaR = strtotime($value["fecha_respuesta"]);
+                                            $formatoFechaR = date('d.m.Y', $formatoFechaR);
+
+                                            ?>
+
+                                            <span class="small float-right"><?php echo $value["nombre_admin"]; ?> | <?php echo $formatoFechaR; ?></span>
+
+                                        </div>
+
+                                        <div class="col-3 col-sm-4 col-lg-2 p-2">
+
+                                            <img src="<?php echo $blog["dominio"] . $value["foto_admin"]; ?>" class="img-thumbnail">
+
+                                        </div>
+
+                                    <?php endif ?>
+
+                                <?php endif ?>
+
+                            <?php endforeach ?>
+
+                        <?php else : ?>
+
+                            <p class="pl-3 text-secondary">¡Este artículo no tiene opiniones!</p>
+
+                        <?php endif ?>
 
                     </div>
 
