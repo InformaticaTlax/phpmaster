@@ -283,51 +283,54 @@ CONTENIDO ARTÍCULO
 
                     <!-- FORMULARIO DE OPINIONES -->
 
-                    <form method="post" >
-                        <input type="hidden" name="id_art" value="<?php echo $articulo[0]["id_articulo"]; ?>">
+                    <form method="post" enctype="multipart/form-data">
+                        
+                            <input type="hidden" name="id_art" value="<?php echo $articulo[0]["id_articulo"]; ?>">
 
-                        <label class="text-muted lead">¿Qué tal te pareció el artículo?</label>
+                            <label class="text-muted lead">¿Qué tal te pareció el artículo?</label>
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="col-12 col-md-8 col-lg-9">
+                                <div class="col-12 col-md-8 col-lg-9">
 
-                                <div class="input-group-lg">
+                                    <div class="input-group-lg">
 
-                                    <input type="text" class="form-control my-3" placeholder="Tu nombre" name="nombre_opinion" required>
+                                        <input type="text" class="form-control my-3" placeholder="Tu nombre" name="nombre_opinion" required>
 
-                                    <input type="email" class="form-control my-3" placeholder="Tu email" name="email_opinion" required>
+                                        <input type="email" class="form-control my-3" placeholder="Tu email" name="email_opinion" required>
+
+                                    </div>
 
                                 </div>
 
+                                <input type="file" name="fotoOpinion" class="d-none" id="fotoOpinion">
+
+							<label for="fotoOpinion" class="d-none d-md-block col-md-4 col-lg-3">
+								
+								<img src="<?php echo $blog["dominio"];?>vistas/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoOpinion">
+
+							</label>
+
                             </div>
 
-                            <div class="d-none d-md-block col-md-4 col-lg-3">
+                            <textarea class="form-control my-3" rows="7" placeholder="Escribe aquí tu mensaje" name="contenido_opinion" required></textarea>
 
-                                <img src="<?php echo $blog["dominio"]; ?>vistas/img/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2">
+                            <input type="submit" class="btn btn-dark btn-lg btn-block" value="Enviar">
 
-                            </div>
+                            <?php
 
-                        </div>
+                            $enviarOpinion = ControladorBlog::ctrEnviarOpinion();
+                            echo '<pre>';
+                            print_r($enviarOpinion);
+                            echo '</pre>';
 
-                        <textarea class="form-control my-3" rows="7" placeholder="Escribe aquí tu mensaje" name="contenido_opinion" required></textarea>
+                            ?>
 
-                        <input type="submit" class="btn btn-dark btn-lg btn-block" value="Enviar">
+                        </form>
 
-                        <?php
+                        <!-- PUBLICIDAD -->
 
-                        $enviarOpinion = ControladorBlog::ctrEnviarOpinion();
-                        echo '<pre>';
-                        print_r($enviarOpinion);
-                        echo '</pre>';
-
-                        ?>
-
-                    </form>
-
-                    <!-- PUBLICIDAD -->
-
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
+                        <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
 
 
                 </div>

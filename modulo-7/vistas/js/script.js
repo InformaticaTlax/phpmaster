@@ -156,14 +156,34 @@ $(".deslizadorArticulos").jdSlider({
 	}]
 
 })
-//compartir articulos
+/*=============================================
+COMPARTIR ARTÍCULOS
+=============================================*/
 
 $('.social-share').shapeShare();
 
+/*=============================================
+OPINIONES VACÍAS
+=============================================*/
 
-//opiniones vacias
-if(document.querySelector(".opiniones").childNodes.length == 1){
+if ($(".opiniones").html()) {
 
-	$(".opiniones").html(`<p class="pl-3 text-secondary">¡Este artículo no tiene opiniones!</p>`)
+	if (document.querySelector(".opiniones").childNodes.length == 1) {
+
+		$(".opiniones").html(`
+
+			<p class="pl-3 text-secondary">¡Este artículo no tiene opiniones!</p>
+
+		`)
+	}
 
 }
+
+//subir foto temporar opionon
+
+$("#fotoOpinion").change(function(){
+	var imagen = this;
+	console.log("imagen", imagen);
+
+
+})
