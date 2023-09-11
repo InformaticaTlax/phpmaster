@@ -7,7 +7,18 @@ if (isset($rutas[1])) {
     $opiniones = ControladorBlog::ctrMostrarOpiniones("id_art", $articulo[0]["id_articulo"]);
     //echo '<pre>'; print_r($opiniones); echo '</pre>';
 }
+//funcion para limitar el foreach
 
+function limitarForeach($array, $limite){
+
+    foreach ($array as $key => $value){
+
+        if(!$limite--) break;//si pesos limite es = 0 entonces Break
+
+        yield  $key => $value;
+
+    }
+}
 
 ?>
 
@@ -403,78 +414,33 @@ CONTENIDO ARTÍCULO
 
                     <h4>Artículos Recientes</h4>
 
-                    <div class="d-flex my-3">
+                    <?php foreach ($totalArticulos as $key => $value) : ?>
 
-                        <div class="w-100 w-xl-50 pr-3 pt-2">
+                        <div class="d-flex my-3">
 
-                            <a href="articulos.html">
+                            <div class="w-100 w-xl-50 pr-3 pt-2">
 
-                                <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo05.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+                                <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $value["ruta_articulo"]; ?>">
 
-                            </a>
+                                    <img src="<?php echo $blog["dominio"] . $value["portada_articulo"]; ?>vistas/img/articulo05.png" alt="<?php $value["titulo_articulo"]; ?>" class="img-fluid">
 
-                        </div>
+                                </a>
 
-                        <div>
+                            </div>
 
-                            <a href="articulos.html" class="text-secondary">
+                            <div>
 
-                                <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $value["ruta_articulo"] ?>" class="text-secondary">
 
-                            </a>
+                                    <p class="small"><?php  echo substr($value["descripcion_articulo"],0, -150)."...";?></p>
 
-                        </div>
+                                </a>
 
-                    </div>
-
-                    <div class="d-flex my-3">
-
-                        <div class="w-100 w-xl-50 pr-3 pt-2">
-
-                            <a href="articulos.html">
-
-                                <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo06.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-                            </a>
+                            </div>
 
                         </div>
 
-                        <div>
-
-                            <a href="articulos.html" class="text-secondary">
-
-                                <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                    <div class="d-flex my-3">
-
-                        <div class="w-100 w-xl-50 pr-3 pt-2">
-
-                            <a href="articulos.html">
-
-                                <img src="<?php echo $blog["dominio"]; ?>vistas/img/articulo07.png" alt="Lorem ipsum dolor sit amet" class="img-fluid">
-
-                            </a>
-
-                        </div>
-
-                        <div>
-
-                            <a href="articulos.html" class="text-secondary">
-
-                                <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
+                    <?php endforeach ?>
 
                 </div>
 
