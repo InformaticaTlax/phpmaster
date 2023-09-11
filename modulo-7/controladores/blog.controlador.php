@@ -125,7 +125,7 @@ class ControladorBlog {
 
                         imagealphablending($destino, FALSE);
 
-                        imagesavealpha($destino, TRUE);
+                        imagesavealpha($destino, TRUE);//si trae trasnaoarencia la imagen 
 
                         imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
