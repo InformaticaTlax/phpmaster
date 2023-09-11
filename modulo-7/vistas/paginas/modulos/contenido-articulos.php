@@ -414,7 +414,7 @@ CONTENIDO ARTÍCULO
 
                     <h4>Artículos Recientes</h4>
 
-                    <?php foreach ($totalArticulos as $key => $value) : ?>
+                    <?php foreach (limitarForeach($totalArticulos, 3) as $key => $value) : ?>
 
                         <div class="d-flex my-3">
 
