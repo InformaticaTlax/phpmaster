@@ -17,12 +17,12 @@ class ControladorBlog {
 
     //mostrar contenido categorias
 
-    static public function ctrMostrarCategorias()
+    static public function ctrMostrarCategorias($item, $valor)
     {
 
         $tabla = "categorias";
 
-        $respuesta = ModeloBlog::mdlMostrarcategorias($tabla);
+        $respuesta = ModeloBlog::mdlMostrarcategorias($tabla, $item, $valor);
 
         return $respuesta;
     }
@@ -161,5 +161,30 @@ class ControladorBlog {
                 return "error";
             }
         }
+    }
+    //Actualizar vista Articulos
+
+    static public function ctrActualizarVista($ruta){
+
+        $articulo =  ControladorBlog::ctrMostrarConInnerJoin(0,-1,"ruta_articulo", $ruta);
+
+        $valor = $articulo[0]["vistas_articulo"] + 1;
+
+        $tabla = "articulos";
+
+        $respueta = ModeloBlog::mdlActualizarVista($tabla, $valor, $ruta);
+    }
+    /*=============================================
+	Articulos Destacados
+	=============================================*/
+
+    static public function ctrArticulosDestacados($item, $valor)
+    {
+
+        $tabla = "articulos";
+
+        $respuesta = ModeloBlog::mdlArticulosDestacados($tabla, $item, $valor);
+
+        return $respuesta;
     }
 }

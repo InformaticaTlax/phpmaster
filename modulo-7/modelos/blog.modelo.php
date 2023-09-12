@@ -19,16 +19,30 @@ class ModeloBlog{
         $stmt = null;
     }
 
-    //mostar contenido categorias
+    /*=============================================
+	Mostrar categorias
+	=============================================*/
 
-    static public function mdlMostrarCategorias($tabla)
+    static public function mdlMostrarCategorias($tabla, $item, $valor)
     {
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+        if ($item != null && $valor != null) {
 
-        $stmt->execute();
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 
-        return $stmt->fetchAll();
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
 
         $stmt->close();
 
@@ -139,6 +153,53 @@ class ModeloBlog{
         $stmt->close();
 
         $stmt = null;
+    }
+
+    //actualizar vista articulo
+
+    static public function mdlActualizarVista($tabla, $valor, $ruta){
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET vista_articulo = :vistas_articulo WHERE ruta_articulo = :ruta_articulo");
+        $stmt -> bindParam(":vistas_articulo", $valor, PDO::PARAM_STR);
+        $stmt->bindParam(":ruta_articulo", $ruta, PDO::PARAM_STR);
+        
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            print_r(Conexion::conectar()->errorInfo());
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+    /*=============================================
+	Articulos Destacados
+	=============================================*/
+
+    static public function mdlArticulosDestacados($tabla, $item, $valor)
+    {
+
+        if ($item != null && $valor != null) {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY vistas_articulo DESC LIMIT 3");
+
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY vistas_articulo DESC LIMIT 3");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
     }
 
 }

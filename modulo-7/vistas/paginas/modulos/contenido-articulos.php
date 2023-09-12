@@ -6,6 +6,8 @@ if (isset($rutas[1])) {
     $totalArticulos = ControladorBlog::ctrMostrartotalArticulos("id_cat", $articulo[0]["id_cat"]);
     $opiniones = ControladorBlog::ctrMostrarOpiniones("id_art", $articulo[0]["id_articulo"]);
     //echo '<pre>'; print_r($opiniones); echo '</pre>';
+
+    $actualizarVistaArticulo = ControladorBlog::ctrActualizarVista($rutas[1]);
 }
 //funcion para limitar el foreach
 
