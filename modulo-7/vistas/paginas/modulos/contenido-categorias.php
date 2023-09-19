@@ -1,6 +1,8 @@
 <?php
 
-//seleccinar los articulos de la categoria especifica
+/*=============================================
+Seleccionar los artículos de la categoría especifica
+=============================================*/
 
 if (isset($rutas[0])) {
 
@@ -13,7 +15,10 @@ if (isset($rutas[0])) {
     $articulosDestacados = ControladorBlog::ctrArticulosDestacados("id_cat", $articulos[0]["id_cat"]);
 }
 
-//revisar ssi viene paginacion
+/*=============================================
+Revisar si viene paginación de categorías
+=============================================*/
+
 if (isset($rutas[1])) {
 
     if (is_numeric($rutas[1])) {
@@ -22,28 +27,26 @@ if (isset($rutas[1])) {
 
             echo '<script>
 
-                windows.locarion = "' . $blog["dominio"] . '/error404"
-            
-            </script>';
+				window.location = "' . $blog["dominio"] . 'error404";
+
+			</script>';
 
             return;
         }
 
-
         $paginaActual = $rutas[1];
 
         $desde = ($rutas[1] - 1) * 5;
-
         $cantidad = 5;
 
-        $articulos =  ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", isset($rutas[0]));
+        $articulos = ControladorBlog::ctrMostrarConInnerJoin($desde, $cantidad, "ruta_categoria", $rutas[0]);
     } else {
 
         echo '<script>
 
-                windows.locarion = "' . $blog["dominio"] . '/error404"
-            
-            </script>';
+			window.location = "' . $blog["dominio"] . 'error404";
+
+		</script>';
 
         return;
     }
@@ -52,7 +55,11 @@ if (isset($rutas[1])) {
     $paginaActual = 1;
 }
 
+$anuncios = ControladorBlog::ctrTraerAnuncios("categorias");
+
+
 ?>
+
 
 <!--=====================================
 CONTENIDO CATEGORIA
@@ -68,7 +75,7 @@ CONTENIDO CATEGORIA
 
             <li class="breadcrumb-item inicio"><a href="<?php echo $blog["dominio"]; ?>">Inicio</a></li>
 
-            <li class="breadcrumb-item active"><?php echo $articulos[0]["descripcion_categoria"] ?></li>
+            <li class="breadcrumb-item active"><?php echo $articulos[0]["descripcion_categoria"]; ?></li>
 
         </ul>
 
@@ -78,9 +85,9 @@ CONTENIDO CATEGORIA
 
             <div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
 
-                <!-- ARTÍCULO 01 -->
-
                 <?php foreach ($articulos as $key => $value) : ?>
+
+
                     <!-- ARTÍCULOS -->
 
                     <div class="row">
@@ -114,9 +121,7 @@ CONTENIDO CATEGORIA
 
                     <hr class="mb-4 mb-lg-5" style="border: 1px solid #79FF39">
 
-
                 <?php endforeach ?>
-
 
                 <div class="container d-none d-md-block">
 
@@ -147,7 +152,6 @@ CONTENIDO CATEGORIA
                         <a href="<?php echo $blog["dominio"] . preg_replace('/[0-9ñÑáéíóúÁÉÍÓÚ ]/', "_", $value); ?>" class="btn btn-secondary btn-sm m-1"><?php echo $value; ?></a>
 
                     <?php endforeach ?>
-
 
                 </div>
 
@@ -195,23 +199,11 @@ CONTENIDO CATEGORIA
 
                 <!-- PUBLICIDAD -->
 
-                <div class="mb-4">
+                <?php foreach ($anuncios as $key => $value) : ?>
 
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad03.png" class="img-fluid">
+                    <?php echo $value["codigo_anuncio"]; ?>
 
-                </div>
-
-                <div class="my-4">
-
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad02.jpg" class="img-fluid">
-
-                </div>
-
-                <div class="my-4">
-
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad05.png" class="img-fluid">
-
-                </div>
+                <?php endforeach ?>
 
             </div>
 
