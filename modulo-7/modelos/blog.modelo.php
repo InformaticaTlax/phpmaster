@@ -255,4 +255,21 @@ class ModeloBlog{
         return $stmt->fetchAll();
     }
 
+    //traer banner
+
+    static public function mdlTraerBanner($tabla, $valor)
+    {
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE pagina_banner = :pagina_banner");
+
+        $stmt->bindParam(":pagina_banner",
+            $valor,
+            PDO::PARAM_STR
+        );
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
 }
