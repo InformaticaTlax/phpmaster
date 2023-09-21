@@ -7,20 +7,21 @@ if (isset($rutas[1])) {
     $opiniones = ControladorBlog::ctrMostrarOpiniones("id_art", $articulo[0]["id_articulo"]);
     //echo '<pre>'; print_r($opiniones); echo '</pre>';
 
-    $actualizarVistaArticulo = ControladorBlog::ctrActualizarVista($rutas[1]);
+   // $actualizarVistaArticulo = ControladorBlog::ctrActualizarVista($rutas[1]);
 }
 //funcion para limitar el foreach
 
-function limitarForeach($array, $limite){
+function limitarForeach($array, $limite)
+{
 
-    foreach ($array as $key => $value){
+    foreach ($array as $key => $value) {
 
-        if(!$limite--) break;//si pesos limite es = 0 entonces Break
+        if (!$limite--) break; //si pesos limite es = 0 entonces Break
 
         yield  $key => $value;
-
     }
 }
+$anuncios = ControladorBlog::ctrTraerAnuncios("articulos");
 
 ?>
 
@@ -399,7 +400,11 @@ CONTENIDO ARTÍCULO
 
                     <!-- PUBLICIDAD -->
 
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad01.jpg" class="img-fluid my-3 d-block d-md-none" width="100%">
+                    <?php foreach ($anuncios as $key => $value) : ?>
+
+                        <?php echo $value["codigo_anuncio"]; ?>
+
+                    <?php endforeach ?>
 
 
                 </div>
@@ -434,7 +439,7 @@ CONTENIDO ARTÍCULO
 
                                 <a href="<?php echo $blog["dominio"] . $articulo[0]["ruta_categoria"] . "/" . $value["ruta_articulo"] ?>" class="text-secondary">
 
-                                    <p class="small"><?php  echo substr($value["descripcion_articulo"],0, -150)."...";?></p>
+                                    <p class="small"><?php echo substr($value["descripcion_articulo"], 0, -150) . "..."; ?></p>
 
                                 </a>
 

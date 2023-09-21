@@ -8,6 +8,8 @@ if (isset($rutas[0]) && is_numeric($rutas[0])) {
 }
 $articulosDestacados = ControladorBlog::ctrArticulosDestacados(null, null);
 
+$anuncios = ControladorBlog::ctrTraerAnuncios("inicio");
+
 ?>
 
 <!--=====================================
@@ -128,21 +130,11 @@ CONTENIDO INICIO
                 </div>
                 <!-- PUBLICIDAD -->
 
-                <div class="my-4">
+                <?php foreach($anuncios as $key => $value): ?>
 
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad01.jpg" class="img-fluid">
+                    <?php echo $value["codigo_anuncio"]; ?>
 
-                </div>
-
-                <div class="my-4">
-
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad02.jpg" class="img-fluid">
-
-                </div>
-
-                <div class="my-4">
-
-                    <img src="<?php echo $blog["dominio"]; ?>vistas/img/ad05.png" class="img-fluid">
+                <?php endforeach ?>                    
 
                 </div>
 
