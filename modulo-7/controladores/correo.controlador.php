@@ -56,7 +56,7 @@ class ControladorCorreo
                     $mail->send();
                     return "ok";
                 } catch (Exception $e) {
-                    return "erroro";
+                    return "error";
                 }
             } else {
 
