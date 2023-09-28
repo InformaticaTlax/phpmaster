@@ -2,16 +2,17 @@
 
 class Conexion{
 
-    static public function conectar(){
+	static public function conectar(){
 
-        $link = new PDO("mysql:host=localhost;dbname=blog-php",
-                        "root",
-                        "");
+		$link = new PDO("mysql:host=localhost;dbname=blog-php",
+						"root",
+						"");
 
-        $link->exec("set names utf8");
+		$link->exec("set names utf8");
 
-        return $link;
+		return $link;
+
+	}
 
 
-    }
-   }
+}

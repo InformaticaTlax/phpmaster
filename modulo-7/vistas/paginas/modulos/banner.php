@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 $banner = ControladorBlog::ctrTraerBanner("inicio");
 
-//echo '<pre>'; print_r($banner); echo '</pre>';
+
 
 ?>
 
@@ -13,38 +13,39 @@ BANNER
 <div class="bannerEstatico d-none d-md-block"></div>
 
 <section class="jd-slider fade-slider">
+	
+	<div class="slide-inner">
+		
+		<ul class="slide-area">
 
-    <div class="slide-inner">
+		<?php foreach ($banner as $key => $value): ?>
 
-        <ul class="slide-area">
+			<li>
+				
+				<img src="<?php echo $blog["dominio"].$value["img_banner"];?>" class="img-fluid">
 
-            <?php foreach ($banner as $key => $value) : ?>
+			</li>
+			
+		<?php endforeach ?>
+			
+			
 
-                <li>
+		
+		</ul>
 
-                    <img src="<?php echo $blog["dominio"].$value["img_banner"]; ?>" class="img-fluid">
+	</div>
 
-                </li>
+	<div class="controller d-none">
+		
+		<a class="auto" href="#">
+			
+			<i class="fas fa-play fa-xs"></i>
+			<i class="fas fa-pause fa-xs"></i>
 
+		</a>
 
-            <?php endforeach ?>
+		<div class="indicate-area"></div>
 
-
-        </ul>
-
-    </div>
-
-    <div class="controller d-none">
-
-        <a class="auto" href="#">
-
-            <i class="fas fa-play fa-xs"></i>
-            <i class="fas fa-pause fa-xs"></i>
-
-        </a>
-
-        <div class="indicate-area"></div>
-
-    </div>
+	</div>
 
 </section>

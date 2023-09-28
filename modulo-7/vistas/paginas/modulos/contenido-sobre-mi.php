@@ -1,43 +1,44 @@
- <div class="container-fluid bg-white">
+ 
+<div class="container-fluid bg-white">
 
-     <div class="container py-4">
+	<div class="container py-4">
 
-         <div class="row">
+		<div class="row">
 
-             <div class="col-12 col-lg-6">
+			<div class="col-12 col-lg-6">
 
-                 <?php
+			<?php
 
-                    echo $blog["sobre_mi_completo"];
+			echo $blog["sobre_mi_completo"];
 
-                    ?>
+			?>
 
-             </div>
+			</div>
 
-             <div class="col-12 col-lg-6">
-
-
-                 <h4 class="mt-lg-4 float-right">Contáctenos:</h4>
-
-                 <form method="post">
+			<div class="col-12 col-lg-6">
 
 
-                     <input type="text" class="form-control my-2" name="nombreContacto" placeholder="Nombre y apellido" require>
+			<h4 class="mt-lg-4 float-right">Contáctenos:</h4>
 
-                     <input type="email" class="form-control my-2" name="emailContacto" placeholder="Escriba su correo electrónico" require>
+			<form method="post">
+				
 
-                     <textarea name="mensajeContacto" class="form-control my-2" cols="30" rows="10" placeholder="Escriba su mensaje"></textarea>
+				<input type="text" class="form-control my-2" name="nombreContacto" placeholder="Nombre y apellido" require>
 
-                     <input type="submit" class="btn btn-primary float-right" value="Enviar">
+				<input type="email" class="form-control my-2" name="emailContacto" placeholder="Escriba su correo electrónico" require>
 
-                     <?php
+				<textarea name="mensajeContacto" class="form-control my-2" cols="30" rows="10" placeholder="Escriba su mensaje" ></textarea>
 
-                        $enviarCorreo = ControladorCorreo::ctrEnviarCorreo();
+				<input type="submit" class="btn btn-primary float-right" value="Enviar">
 
-                        if ($enviarCorreo != "") {
+				<?php 
+
+					$enviarCorreo = ControladorCorreo::ctrEnviarCorreo();
+
+					if($enviarCorreo != ""){
 
 
-                            echo '<script>
+						echo '<script>
 
 							if ( window.history.replaceState ) {
 
@@ -47,9 +48,9 @@
 
 						</script>';
 
-                            if ($enviarCorreo == "ok") {
+						if($enviarCorreo == "ok"){
 
-                                echo '<script>
+							echo '<script>
 
 
 								notie.alert({
@@ -60,11 +61,12 @@
 								})
 
 							</script>';
-                            }
 
-                            if ($enviarCorreo == "error") {
+						}
 
-                                echo '<script>
+						if($enviarCorreo == "error"){
+
+							echo '<script>
 
 
 								notie.alert({
@@ -75,11 +77,12 @@
 								})
 
 							</script>';
-                            }
 
-                            if ($enviarCorreo == "error-sintaxis") {
+						}
 
-                                echo '<script>
+						if($enviarCorreo == "error-sintaxis"){
+
+							echo '<script>
 
 
 								notie.alert({
@@ -90,19 +93,22 @@
 								})
 
 							</script>';
-                            }
-                        }
 
-                        ?>
+						}
 
 
-                 </form>
+					}
+
+				 ?>
 
 
-             </div>
+			</form>
 
-         </div>
 
-     </div>
+			</div>
 
- </div>
+		</div>
+
+	</div>
+
+</div>

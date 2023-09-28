@@ -1,240 +1,275 @@
-<?php
+<?php  
 
-class ControladorBlog {
+Class ControladorBlog{
 
-    //mostrar contenido tabla blog
+	/*=============================================
+	Mostrar contenido tabla blog
+	=============================================*/
 
-    static public function ctrMostrarBlog(){
+	static public function ctrMostrarBlog(){
+	
+		$tabla = "blog";
 
-        $tabla = "blog";
+		$respuesta = ModeloBlog::mdlMostrarBlog($tabla);
 
-        $respuesta = ModeloBlog::mdlMostrarBlog($tabla);
+		return $respuesta;
 
-        return $respuesta;
-        
+	}
 
-    }
+	/*=============================================
+	Mostrar categorías
+	=============================================*/
 
-    //mostrar contenido categorias
+	static public function ctrMostrarCategorias($item, $valor){
+	
+		$tabla = "categorias";
 
-    static public function ctrMostrarCategorias($item, $valor)
-    {
+		$respuesta = ModeloBlog::mdlMostrarCategorias($tabla, $item, $valor);
 
-        $tabla = "categorias";
+		return $respuesta;
 
-        $respuesta = ModeloBlog::mdlMostrarcategorias($tabla, $item, $valor);
+	}
 
-        return $respuesta;
-    }
+	/*=============================================
+	Mostrar artículos y categorías con inner join
+	=============================================*/
+	static public function ctrMostrarConInnerJoin($desde, $cantidad, $item, $valor){
 
-    //Mostar Articulos y categorias con inner Join
-    static public function ctrMostrarConInnerJoin($desde, $cantidad, $item, $valor)
-    {
+		$tabla1 = "categorias";
+		$tabla2 = "articulos";
 
-        $tabla1 = "categorias";
-        $tabla2 = "articulos";
+		$respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1, $tabla2, $desde, $cantidad, $item, $valor);
 
-        $respuesta = ModeloBlog::mdlMostrarConInnerJoin($tabla1 , $tabla2, $desde, $cantidad, $item, $valor);
+		return $respuesta;
 
-        return $respuesta;
-    }
+	}
 
-    //mostrar total Artiuclos
-    static public function ctrMostrartotalArticulos($item, $valor){
+	/*=============================================
+	Mostrar total articulos
+	=============================================*/
 
-        $tabla = "articulos";
+	static public function ctrMostrarTotalArticulos($item, $valor){
 
-        $respuesta = ModeloBlog::mdlMostrarTotalArticulos($tabla, $item, $valor);
+		$tabla = "articulos";
 
-        return $respuesta;
+		$respuesta = ModeloBlog::mdlMostrarTotalArticulos($tabla, $item, $valor);
 
-    }
+		return $respuesta;
 
-    //mostrar opiniones
+	}
 
-    static public function ctrMostrarOpiniones($item, $valor)
-    {
+	/*=============================================
+	Mostrar opiniones inner join
+	=============================================*/
 
-        $tabla1 = "opiniones";
-        $tabla2 = "administradores";
+	static public function ctrMostrarOpiniones($item, $valor){
 
-        $respuesta = ModeloBlog::mdlMostrarOpiniones($tabla1, $tabla2, $item, $valor);
+		$tabla1 = "opiniones";
+		$tabla2 = "administradores";
 
-        return $respuesta;
-    }
+		$respuesta = ModeloBlog::mdlMostrarOpiniones($tabla1, $tabla2, $item, $valor);
 
-    //enviar opinion
-    static public function ctrEnviarOpinion()
-    {
+		return $respuesta;
 
-        if (isset($_POST["nombre_opinion"])) {
+	}
 
-            if (
-                preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["nombre_opinion"]) &&
-                preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["correo_opinion"]) &&
-                preg_match('/^[=\\$\\;\\*\\"\\?\\¿\\!\\¡\\:\\.\\,\\0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/',  $_POST["contenido_opinion"])
-            ) {
+	/*=============================================
+	Enviar Opinión
+	=============================================*/
 
-                /*=============================================
+	static public function ctrEnviarOpinion(){
+
+		if(isset($_POST["nombre_opinion"])){
+
+			if(preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["nombre_opinion"]) &&
+			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["correo_opinion"]) &&
+			   preg_match('/^[=\\$\\;\\*\\"\\?\\¿\\!\\¡\\:\\.\\,\\0-9a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/',  $_POST["contenido_opinion"])){
+
+				/*=============================================
 				VALIDACIÓN FOTO LADO SERVIDOR
 				=============================================*/
 
-                if (isset($_FILES["fotoOpinion"]["tmp_name"]) && !empty($_FILES["fotoOpinion"]["tmp_name"])) {
+				if(isset($_FILES["fotoOpinion"]["tmp_name"]) && !empty($_FILES["fotoOpinion"]["tmp_name"])){
 
-                    /*=============================================
+					/*=============================================
 					CAPTURAR ANCHO Y ALTO ORIGINAL DE LA IMAGEN Y DEFINIR LOS NUEVOS VALORES
 					=============================================*/
 
-                    list($ancho, $alto) = getimagesize($_FILES["fotoOpinion"]["tmp_name"]);
+					list($ancho, $alto) = getimagesize($_FILES["fotoOpinion"]["tmp_name"]);
 
-                    $nuevoAncho = 128;
-                    $nuevoAlto = 128;
+					$nuevoAncho = 128;
+					$nuevoAlto = 128;
 
-                    /*=============================================
+					/*=============================================
 					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
 					=============================================*/
 
-                    $directorio = "vistas/img/usuarios/";
+					$directorio = "vistas/img/usuarios/";
 
-                    /*=============================================
+					/*=============================================
 					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
 					=============================================*/
 
-                    if ($_FILES["fotoOpinion"]["type"] == "image/jpeg") {
+					if($_FILES["fotoOpinion"]["type"] == "image/jpeg"){
 
-                        $aleatorio = mt_rand(100, 9999);
+						$aleatorio = mt_rand(100, 9999);
 
-                        $ruta = $directorio . $aleatorio . ".jpg";
+						$ruta = $directorio.$aleatorio.".jpg";
 
-                        $origen = imagecreatefromjpeg($_FILES["fotoOpinion"]["tmp_name"]);
+						$origen = imagecreatefromjpeg($_FILES["fotoOpinion"]["tmp_name"]);
 
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-                        imagejpeg($destino, $ruta);
-                    } else if ($_FILES["fotoOpinion"]["type"] == "image/png") {
-
-                        $aleatorio = mt_rand(100, 9999);
-
-                        $ruta = $directorio . $aleatorio . ".png";
-
-                        $origen = imagecreatefrompng($_FILES["fotoOpinion"]["tmp_name"]);
-
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-                        imagealphablending($destino, FALSE);
-
-                        imagesavealpha($destino, TRUE);//si trae trasnaoarencia la imagen 
-
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-                        imagepng($destino, $ruta);
-                    } else {
-
-                        return "error-formato";
-                    }
-                } else {
+						imagejpeg($destino, $ruta);
 
 
-                    $ruta = "vistas/img/usuarios/default.png";
-                }
+					}else if($_FILES["fotoOpinion"]["type"] == "image/png"){
+
+						$aleatorio = mt_rand(100, 9999);
+
+						$ruta = $directorio.$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["fotoOpinion"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagealphablending($destino, FALSE);
+			
+						imagesavealpha($destino, TRUE);	
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}else{
+
+						return "error-formato";	
+					}
+
+				}else{
 
 
-                $tabla = "opiniones";
+					$ruta = "vistas/img/usuarios/default.png";
+				}
+				
 
-                $datos = array(
-                    "id_art" => $_POST["id_art"],
-                    "nombre_opinion" => $_POST["nombre_opinion"],
-                    "correo_opinion" => $_POST["correo_opinion"],
-                    "foto_opinion" => $ruta,
-                    "contenido_opinion" => $_POST["contenido_opinion"],
-                    "fecha_opinion" => date('Y-m-d'),
-                    "id_adm" => 1
-                );
+				$tabla = "opiniones";
 
-                $respuesta = ModeloBlog::mdlEnviarOpinion($tabla, $datos);
+				$datos = array("id_art" => $_POST["id_art"],
+							   "nombre_opinion" => $_POST["nombre_opinion"],
+							   "correo_opinion" => $_POST["correo_opinion"],
+							   "foto_opinion" => $ruta,
+							   "contenido_opinion" => $_POST["contenido_opinion"],
+							   "fecha_opinion"=> date('Y-m-d'),
+							    "id_adm" => 1
+							   );
 
-                return $respuesta;
-            } else {
+				$respuesta = ModeloBlog::mdlEnviarOpinion($tabla, $datos);
 
-                return "error";
-            }
-        }
-    }
-    //Actualizar vista Articulos
+				return $respuesta;
 
-    static public function ctrActualizarVista($ruta){
+			}else{
 
-        $articulo =  ControladorBlog::ctrMostrarConInnerJoin(0,-1,"ruta_articulo", $ruta);
+				return "error";
 
-        $valor = $articulo[0]["vistas_articulo"] + 1;
+			}
 
-        $tabla = "articulos";
+		}
 
-        $respueta = ModeloBlog::mdlActualizarVista($tabla, $valor, $ruta);
-    }
-    /*=============================================
+	}
+
+	/*=============================================
+	Actualizar vista articulo
+	=============================================*/
+
+	static public function ctrActualizarVista($ruta){
+
+		$articulo = ControladorBlog::ctrMostrarConInnerJoin(0, 1, "ruta_articulo", $ruta);
+
+		$valor = $articulo[0]["vistas_articulo"] + 1;
+
+		$tabla ="articulos";
+
+		$respuesta = ModeloBlog::mdlActualizarVista($tabla, $valor, $ruta);
+
+	}
+
+	/*=============================================
 	Articulos Destacados
 	=============================================*/
 
-    static public function ctrArticulosDestacados($item, $valor)
-    {
+	static public function ctrArticulosDestacados($item, $valor){
 
-        $tabla = "articulos";
+		$tabla = "articulos";
 
-        $respuesta = ModeloBlog::mdlArticulosDestacados($tabla, $item, $valor);
+		$respuesta = ModeloBlog::mdlArticulosDestacados($tabla, $item, $valor);
 
-        return $respuesta;
-    }
+		return $respuesta;
+	}
 
-    static public function ctrBuscador($desde, $cantidad, $busqueda)
-    {
+	/*=============================================
+	Buscador
+	=============================================*/
 
-        $tabla1 = "categorias";
-        $tabla2 = "articulos";
+	static public function ctrBuscador($desde, $cantidad, $busqueda){
 
-        $respuesta = ModeloBlog::mdlBuscador($tabla1, $tabla2, $desde, $cantidad, $busqueda);
+		$tabla1 = "categorias";
+		$tabla2 = "articulos";
 
-        return $respuesta;
-    }
+		$respuesta = ModeloBlog::mdlBuscador($tabla1, $tabla2, $desde, $cantidad, $busqueda);
 
-    /*=============================================
+		return $respuesta;
+
+
+	}
+
+	/*=============================================
 	Total Buscador
 	=============================================*/
 
-    static public function ctrTotalBuscador($busqueda)
-    {
+	static public function ctrTotalBuscador($busqueda){
 
-        $tabla = "articulos";
+		$tabla = "articulos";
 
-        $respuesta = ModeloBlog::mdlTotalBuscador($tabla, $busqueda);
+		$respuesta = ModeloBlog::mdlTotalBuscador($tabla, $busqueda);
 
-        return $respuesta;
-    }
+		return $respuesta;
 
-    //traer anuncios
+	}
 
-    static public function ctrTraerAnuncios($valor)
-    {
+	/*=============================================
+	Traer anuncios
+	=============================================*/
 
-        $tabla = "anuncios";
+	static public function ctrTraerAnuncios($valor){
 
-        $respuesta = ModeloBlog::mdlTraerAnuncios($tabla, $valor);
+		$tabla = "anuncios";
 
-        return $respuesta;
-    }
+		$respuesta = ModeloBlog::mdlTraerAnuncios($tabla, $valor);
 
-    //traer banner
+		return $respuesta;
 
-    static public function ctrTraerBanner($valor)
-    {
+	}
 
-        $tabla = "banner";
+	/*=============================================
+	Traer banner
+	=============================================*/
 
-        $respuesta = ModeloBlog::mdlTraerBanner($tabla, $valor);
+	static public function ctrTraerBanner($valor){
 
-        return $respuesta;
-    }
-    
+		$tabla = "banner";
+
+		$respuesta = ModeloBlog::mdlTraerBanner($tabla, $valor);
+
+		return $respuesta;
+
+	}
+
+
+
+
 }
+
+
