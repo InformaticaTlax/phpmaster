@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog del viajero cms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    
+    <!--=====================================
+	PLUGINS DE CSS
+	======================================-->
+    {{-- CSS AdminLTE --}}
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
+  
+
+    {{-- BOOTSTRAP 4 --}}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    {{-- google fonts --}}
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+    <!--=====================================
+	PLUGINS DE JS
+	======================================-->
+
+	{{-- Fontawesome --}}
+	<script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	{{-- jquery.overlayScrollbars.min.js --}}
+	<script src="{{ url('/') }}/js/plugins/jquery.overlayScrollbars.min.js"></script>
+
+	{{-- TAGS INPUT --}}
+	{{-- https://www.jqueryscript.net/form/Bootstrap-4-Tag-Input-Plugin-jQuery.html --}}
+	<script src="{{ url('/') }}/js/plugins/tagsinput.js"></script>
+
+	{{-- SUMMERNOTE --}}
+	{{-- https://summernote.org/ --}}
+	<script src="{{ url('/') }}/js/plugins/summernote.js"></script>
+
+	{{-- NOTIE --}}
+	{{-- https://github.com/jaredreich/notie --}}
+	<script src="{{ url('/') }}/js/plugins/notie.js"></script>
+
+	{{-- JS AdminLTE --}}
+	<script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @include('modulos.header')
+
+		
+        hola soy la plantilla
+
+    </div>
+</body>
+
+</html>
