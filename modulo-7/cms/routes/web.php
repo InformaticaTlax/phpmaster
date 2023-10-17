@@ -25,7 +25,7 @@ Route::view('/opiniones', 'paginas.opiniones');
 Route::view('/banner', 'paginas.banner');
 Route::view('/anuncios', 'paginas.anuncios');
 
-
+Route::get('/','BlogController@trarBlog');
 
 Auth::routes();
 
