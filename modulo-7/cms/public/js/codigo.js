@@ -1,5 +1,5 @@
 /*=============================================
-CAPTURANDO LA RUTA DE MI CMS
+CAPTURANDO LA RUTA DE MI CMS 
 =============================================*/
 
 var ruta = $("#ruta").val();

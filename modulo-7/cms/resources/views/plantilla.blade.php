@@ -72,6 +72,7 @@
 		@include('modulos.footer')
 
     </div>
+	<script src="{{ url('/') }}/js/codigo.js"></script>
 </body>
 
 </html>
