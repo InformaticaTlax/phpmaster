@@ -21,37 +21,42 @@ class BlogController extends Controller
 
         //recoger los datos
 
-        $datos = array("dominio"=>$request->input("dominio"),
-                        "titulo" => $request->input("servidor")
-                        "servidor" => $datos["servidor"],
-                        "titulo" => $request->input("titulo"),
-                        "descripcion" => $request->input("descripcion"));
+        $datos = array(
+            "dominio" => $request->input("dominio"),
+            "servidor" => $request->input("servidor"),
+            "titulo" => $request->input("titulo"),
+            "descripcion" => $request->input("descripcion"));
 
-    //validar datos
-    if(!empty($datos)){
+        //validar datos
+        if (!empty($datos)) {
 
-        $validar = \Validator::make($datos,[
+            $validar = \Validator::make($datos, [
                 "dominio"=>'required|regex:/^[-\\_\\:\\.\\0-9a-z]+$/i',
                 "servidor" => 'required|regex:/^[-\\_\\:\\.\\0-9a-z]+$/i',
                 "titulo" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                "descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-
+                "descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
 
 
         ]);
 
         //revisar la validacion
         if($validar->fails()){
-            echo "error";
+
+            return redirect("/")->with("no-validacion","");
+
         }else{
             $actualizar = array("dominio"=> $datos["dominio"],
                         "servidor" => $datos["servidor"],
                         "titulo" => $datos["titulo"],
                         "descripcion" => $datos["descripcion"]);
+            
+            $blog = Blog::where("id",$id)->update($actualizar);
+
+                return redirect("/")->with("ok-editar", "");
         }
     
     }else{
-        echo "error";
+            return redirect("/")->with("error", "");
     }
 
     }
