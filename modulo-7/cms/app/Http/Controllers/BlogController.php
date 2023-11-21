@@ -25,7 +25,8 @@ class BlogController extends Controller
             "dominio" => $request->input("dominio"),
             "servidor" => $request->input("servidor"),
             "titulo" => $request->input("titulo"),
-            "descripcion" => $request->input("descripcion"));
+            "descripcion" => $request->input("descripcion"),
+            "palabras_claves" => $request->input("palabras_claves"));
 
         //validar datos
         if (!empty($datos)) {
@@ -34,10 +35,12 @@ class BlogController extends Controller
                 "dominio"=>'required|regex:/^[-\\_\\:\\.\\0-9a-z]+$/i',
                 "servidor" => 'required|regex:/^[-\\_\\:\\.\\0-9a-z]+$/i',
                 "titulo" => 'required|regex:/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-                "descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
+                "descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                "palabras_claves" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
 
 
         ]);
+        
 
         //revisar la validacion
         if($validar->fails()){
@@ -48,7 +51,8 @@ class BlogController extends Controller
             $actualizar = array("dominio"=> $datos["dominio"],
                         "servidor" => $datos["servidor"],
                         "titulo" => $datos["titulo"],
-                        "descripcion" => $datos["descripcion"]);
+                        "descripcion" => $datos["descripcion"],
+                    "palabras_claves"=> json_encode(explode(",", $datos["palabras_claves"])));
             
             $blog = Blog::where("id",$id)->update($actualizar);
 
