@@ -6,6 +6,7 @@
    	<title>Blog del viajero cms</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+	<link rel="icon" href="{{$blog[0]["icono"]}}">
     
     <!--=====================================
 	PLUGINS DE CSS

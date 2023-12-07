@@ -108,7 +108,32 @@ class BlogController extends Controller
 
                     $rutaLogo = "img/blog/" . $aleatorio . "." . $portada["logo_temporal"]->guessExtension();
                     
-                    move_uploaded_file($logo["logo_temporal"],$rutaLogo);
+                   // move_uploaded_file($logo["logo_temporal"],$rutaLogo);
+
+                   //redimensionar imagenes
+                   list($ancho, $alto) =getimagesize($logo["logo_temporal"]);
+
+                   $nuevoAncho = 700;
+                   $nuevoAlto = 200;
+
+                   if($logo["logo_temporal"]->guessClientExtension() == "jpeg"){
+
+                        $origen = imagecreatefromjpeg($logo["logo_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0,0,0,0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $rutaLogo);
+
+                   }
+                    if ($logo["logo_temporal"]->guessClientExtension() == "png") {
+
+                        $origen = imagecreatefrompng($logo["logo_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $rutaLogo);
+
+                    }
                 }else{
 
                     $rutaLogo = $datos["logo_actual"];
@@ -124,7 +149,30 @@ class BlogController extends Controller
 
                     $rutaPortada = "img/blog/" . $aleatorio . "." . $portada["portada_temporal"]->guessExtension();
 
-                    move_uploaded_file($portada["logo_temporal"], $rutaPortada);
+                    //move_uploaded_file($portada["logo_temporal"], $rutaPortada);
+
+                    //redimensionar imagenes
+                    list($ancho, $alto) = getimagesize($portada["portada_temporal"]);
+
+                    $nuevoAncho = 700;
+                    $nuevoAlto = 420;
+
+                    if ($portada["portada_temporal"]->guessClientExtension() == "jpeg") {
+
+                        $origen = imagecreatefromjpeg($portada["portada_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $rutaPortada);
+                    }
+                    if ($portada["portada_temporal"]->guessClientExtension() == "png") {
+
+                        $origen = imagecreatefrompng($portada["portada_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $rutaPortada);
+                    }
 
                 } else {
 
@@ -141,7 +189,30 @@ class BlogController extends Controller
 
                     $rutaIcono = "img/blog/" . $aleatorio . "." . $icono["icono_temporal"]->guessExtension();
 
-                    move_uploaded_file($icono["logo_temporal"], $rutaIcono);
+                    // move_uploaded_file($icono["logo_temporal"], $rutaIcono);
+
+                    //redimensionar imagenes
+                    list($ancho, $alto) = getimagesize($icono["icono_temporal"]);
+
+                    $nuevoAncho = 150;
+                    $nuevoAlto = 150;
+
+                    if ($icono["icono_temporal"]->guessClientExtension() == "jpeg") {
+
+                        $origen = imagecreatefromjpeg($icono["icono_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $rutaIcono);
+                    }
+                    if ($icono["icono_temporal"]->guessClientExtension() == "png") {
+
+                        $origen = imagecreatefrompng($icono["icono_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $rutaIcono);
+                    }
 
                 } else {
 
