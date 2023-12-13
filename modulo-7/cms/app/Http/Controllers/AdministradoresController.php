@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Administradores;
+use App\Blog;
 
 class AdministradoresController extends Controller
 {
-    //
-    public function traerAdministradores() {
-        $administradores = Administradores::all();
+    public function index(){
 
-        return view("paginas.administradores", array("administradores"=> $administradores));
+		$administradores = Administradores::all();
+		$blog = Blog::all();
+
+
+		return view("paginas.administradores", array("administradores"=>$administradores, "blog"=>$blog));
+
+	}
 }

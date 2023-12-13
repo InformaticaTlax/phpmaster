@@ -1,15 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
@@ -35,11 +33,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 //RUTAS QUE INCLUYEN TODOS LOS MÉTODOS HTTP
 //Route::resource
@@ -53,3 +47,5 @@ Route::resource('/articulos', 'ArticulosController');
 Route::resource('/opiniones', 'OpinionesController');
 Route::resource('/banner', 'BannerController');
 Route::resource('/anuncios', 'AnunciosController');
+
+

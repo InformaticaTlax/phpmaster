@@ -51,7 +51,7 @@
 
             @method('PUT')
 
-            @csrf <!-- fansificador de spoit malicioso crea un token  -->
+            @csrf
 
             <!-- Default box -->
             <div class="card">

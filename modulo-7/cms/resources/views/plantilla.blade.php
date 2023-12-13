@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   	<title>Blog del viajero cms</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Blog del viajero | CMS</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="icon" href="{{$blog[0]["icono"]}}">
-    
-    <!--=====================================
+	
+	<!--=====================================
 	PLUGINS DE CSS
 	======================================-->
 
-    {{-- BOOTSTRAP 4 --}}
+	{{-- BOOTSTRAP 4 --}}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 	{{-- OverlayScrollbars.min.css --}}
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/OverlayScrollbars.min.css">
 
+	{{-- TAGS INPUT --}}
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
+
+	{{-- SUMMERNOTE --}}
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+
+	{{-- NOTIE --}}
+	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/notie.css">
 
 	{{-- CSS AdminLTE --}}
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/adminlte.min.css">
 
-    {{-- google fonts --}}
+	{{-- google fonts --}}
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
-    <!--=====================================
+
+	<!--=====================================
 	PLUGINS DE JS
 	======================================-->
 
@@ -60,20 +70,27 @@
 	{{-- JS AdminLTE --}}
 	<script src="{{ url('/') }}/js/plugins/adminlte.js"></script>
 
-
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+
+	<div class="wrapper">
+
 		@include('modulos.header')
 
 		@include('modulos.sidebar')
 
-        @yield('content')
+		@yield('content')
 
 		@include('modulos.footer')
 
-    </div>
-	<script src="{{ url('/') }}/js/codigo.js"></script>
+
+	</div>
+
+<input type="hidden" id="ruta" value="{{url('/')}}">
+
+<script src="{{url('/')}}/js/codigo.js"></script>
+
 </body>
 
 </html>

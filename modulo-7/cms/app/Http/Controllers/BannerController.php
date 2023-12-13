@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Banner;
+use App\Blog;
 
 class BannerController extends Controller
 {
-    //
-    public function index()
-    {
+    public function index(){
 
-        $banner = Banner::all();
-        $blog = Blog::all();
+		$banner = Banner::all();
+		$blog = Blog::all();
 
-        return view("paginas.banner", array("banner" => $banner, "blog" => $blog));
-    }
+		return view("paginas.banner", array("banner"=>$banner, "blog"=>$blog));
+
+	}
 }
